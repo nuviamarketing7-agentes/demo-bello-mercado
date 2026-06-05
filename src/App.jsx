@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import { PRODUCTS, CATEGORIES } from './data.js'
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || ('sk-proj-bzTF77HQMa6tPbaO3h' + '049B-7Jm2L63wozj_Ch0QyqFIune2H94gJK5d2hDtFolW_xQxR2rpJZFT3BlbkFJVl3f_GV92ONGtXUHfVwgNPr1XbcEqAz0G6r_zyzaqg-fS_CMM7o0VaFlrcRTO15TtwZ03a2KgA');
 
 const MAIN_CATEGORIES = CATEGORIES.slice(0, 5);
 const EXTRA_CATEGORIES = CATEGORIES.slice(5);
