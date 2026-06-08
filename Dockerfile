@@ -12,12 +12,12 @@ COPY . .
 # Build the frontend
 RUN npm run build
 
-# Expose port 3000 explicitly
-EXPOSE 3000
+# Expose port 80 explicitly
+EXPOSE 80
 
-# Set production env and ensure the PORT is strictly 3000
+# Set production env and ensure the PORT is strictly 80
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=80
 
 # Start the server
 CMD ["node", "server.js"]
