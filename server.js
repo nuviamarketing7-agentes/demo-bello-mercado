@@ -52,6 +52,17 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const startServer = (port) => {
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
+  }).on('error', (err) => {
+    if (err.code === 'EACCES' && port !== 3000) {
+      console.warn(`Permission denied on port ${port}. Falling back to port 3000...`);
+      startServer(3000);
+    } else {
+      console.error(err);
+    }
+  });
+};
+
+startServer(PORT);
