@@ -65,7 +65,7 @@ export default function App() {
   const dropdownRef = useRef(null);
 
   // Chat state
-  const [isChatOpen, setIsChatOpen] = useState(window.innerWidth > 768);
+  const [isChatOpen, setIsChatOpen] = useState(true);
   const [chatMessages, setChatMessages] = useState([
     { role: 'assistant', content: '¡Hola! Soy el asistente virtual de **Bello Mercado** 🥩\n\nEstoy aquí para ayudarte en todo lo que necesites. Puedo **buscar productos**, **agregarlos directamente al carrito** por vos, o **guiarte en la navegación** de la página (como abrir el carrito, ir al checkout y confirmar el pedido).\n\n¿En qué puedo ayudarte hoy? ¡Probá decirme *"Agregá 2kg de asado al carrito"* o *"Mostrame las bebidas"*!', rawContent: '¡Hola! Soy el asistente virtual de **Bello Mercado** 🥩\n\nEstoy aquí para ayudarte en todo lo que necesites. Puedo **buscar productos**, **agregarlos directamente al carrito** por vos, o **guiarte en la navegación** de la página (como abrir el carrito, ir al checkout y confirmar el pedido).\n\n¿En qué puedo ayudarte hoy? ¡Probá decirme *"Agregá 2kg de asado al carrito"* o *"Mostrame las bebidas"*!' }
   ]);
