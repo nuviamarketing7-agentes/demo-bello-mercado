@@ -72,6 +72,8 @@ export default function App() {
   const [chatInput, setChatInput] = useState('');
   const [isChatLoading, setIsChatLoading] = useState(false);
   const chatEndRef = useRef(null);
+  const chatInputRef = useRef(null);
+  const productsRef = useRef(null);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -83,6 +85,13 @@ export default function App() {
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatMessages]);
+
+  // Auto-focus chat input after loading finishes
+  useEffect(() => {
+    if (!isChatLoading && isChatOpen && chatInputRef.current) {
+      chatInputRef.current.focus();
+    }
+  }, [isChatLoading, isChatOpen]);
 
   // Click outside and Escape key dropdown listener
   useEffect(() => {
@@ -286,6 +295,9 @@ export default function App() {
             case 'filter':
               setSearchQuery(act.query || '');
               setActiveCategory('todo');
+              setTimeout(() => {
+                productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 100);
               break;
               
             case 'add_to_cart': {
@@ -512,7 +524,7 @@ export default function App() {
         )}
 
         {/* PRODUCTS GRID */}
-        <section className="products-section">
+        <section className="products-section" ref={productsRef}>
           <div className="section-header">
             <h2 className="section-title">
               {CATEGORIES.find(c => c.id === activeCategory)?.emoji} {CATEGORIES.find(c => c.id === activeCategory)?.label}
@@ -694,6 +706,7 @@ export default function App() {
           </div>
           <div className="chat-input-row">
             <input
+              ref={chatInputRef}
               type="text"
               className="chat-input"
               value={chatInput}
