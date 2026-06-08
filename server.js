@@ -59,7 +59,15 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
+const portsToTry = [80, 3000, 8080];
+portsToTry.forEach(port => {
+  try {
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Server is running on port ${port}`);
+    }).on('error', (err) => {
+      console.warn(`Failed to bind to port ${port}: ${err.message}`);
+    });
+  } catch (err) {
+    console.warn(`Catch block: Failed to bind to port ${port}: ${err.message}`);
+  }
 });
