@@ -64,6 +64,19 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
+const portsToTry = [process.env.PORT || 3000, 80, 8080];
+const listenedPorts = new Set();
+
+portsToTry.forEach(p => {
+  if (listenedPorts.has(p)) return;
+  listenedPorts.add(p);
+  
+  const server = app.listen(p, '0.0.0.0', () => {
+    console.log(`Server is running on port ${p}`);
+  });
+  
+  server.on('error', (err) => {
+    console.log(`Failed to listen on port ${p}: ${err.message}`);
+  });
 });
+
