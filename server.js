@@ -64,13 +64,17 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
-const PORT = parseInt(process.env.PORT, 10) || 3000;
+const PORT = 3000;
 
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+server.on('error', (err) => {
+  console.error('Failed to start server:', err);
 });
 
