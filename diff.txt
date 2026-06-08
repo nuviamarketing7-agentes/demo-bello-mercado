@@ -1,0 +1,803 @@
+diff --git a/src/App.jsx b/src/App.jsx
+index 3eb8700..f297ac5 100644
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,500 +1,69 @@
+-import { useState, useRef, useEffect } from 'react'
+-import './App.css'
+-import { PRODUCTS, CATEGORIES } from './data.js'
+-
+-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || ('sk-proj-bzTF77HQMa6tPbaO3h' + '049B-7Jm2L63wozj_Ch0QyqFIune2H94gJK5d2hDtFolW_xQxR2rpJZFT3BlbkFJVl3f_GV92ONGtXUHfVwgNPr1XbcEqAz0G6r_zyzaqg-fS_CMM7o0VaFlrcRTO15TtwZ03a2KgA');
+-
+-const MAIN_CATEGORIES = CATEGORIES.slice(0, 5);
+-const EXTRA_CATEGORIES = CATEGORIES.slice(5);
+-
+-const SYSTEM_PROMPT = `Eres el asistente virtual de "Bello Mercado", un mercado ubicado en Solymar, Ciudad de la Costa, Uruguay (Tel: +598 2681 3030). 
+-Ayudás a los clientes con información sobre productos, precios y pedidos, y también podés gestionar su carrito y navegación. El negocio hace envíos a domicilio y el pago es contra entrega (Efectivo, Débito o Crédito).
+-
+-CATÁLOGO COMPLETO (Usa estrictamente estos IDs para agregar productos):
+-${PRODUCTS.map(p => `- ID: ${p.id} | ${p.name} ($${p.price}/${p.unit}) [Categoría: ${p.category}]`).join('\n')}
+-
+-INSTRUCCIONES DE ACCIÓN:
+-Puedes realizar acciones directas en la interfaz del usuario devolviendo al final de tu respuesta un bloque JSON exacto precedido por "ACTIONS_JSON:".
+-El bloque JSON debe ser una lista/array de una o más acciones que se ejecutarán en orden.
+-Ejemplo: ACTIONS_JSON:[{"action":"add_to_cart","product_id":1,"qty":2}]
+-
+-Acciones disponibles y sus parámetros:
+-1. Filtrar catálogo:
+-   {"action":"filter","query":"término"} -> Úsalo para buscar productos o categorías. Si quieren ver todo o limpiar filtros, usa query vacía "".
+-2. Añadir al carrito:
+-   {"action":"add_to_cart","product_id":ID,"qty":N} -> Añade N unidades del producto con el ID especificado al carrito.
+-3. Abrir o cerrar el carrito:
+-   {"action":"open_cart"} o {"action":"close_cart"}
+-4. Ir a la pantalla de envío/checkout:
+-   {"action":"start_checkout"}
+-5. Rellenar formulario de checkout:
+-   {"action":"fill_checkout_form","name":"Nombre","address":"Dirección","phone":"Teléfono","paymentMethod":"efectivo|debito|credito","cashAmount":"monto_efectivo_opcional"}
+-   -> Completa sólo los campos que el usuario te indique. Si no conoces algún valor, no lo envíes.
+-6. Confirmar pedido / Finalizar compra:
+-   {"action":"submit_order"} -> Envía el pedido y abre WhatsApp. Úsalo cuando el usuario te pida finalizar la compra, confirmar el pedido, o comprar.
+-
+-REGLA DE TIEMPO REAL (CRÍTICA):
+-Todas las acciones que agregues en ACTIONS_JSON se ejecutan de manera INSTANTÁNEA en la pantalla del usuario en cuanto le llega tu mensaje. Por lo tanto:
+-- NUNCA uses frases de espera como "un momento", "esperá que agrego...", "dame un segundo", "procesando...", "aguardá..." o similares.
+-- Responde SIEMPRE en presente o pasado indicando que la acción YA fue realizada (ej. "¡Listo! Ya te agregué el Asado al carrito." o "Ahí te abrí el carrito para que lo revises.").
+-
+-REGLAS CRÍTICAS:
+-1. Si el usuario te pide agregar un producto (ej. "agregame 2kg de asado de tira"), debes:
+-   - Identificar el producto en el catálogo (Asado de Tira = ID 1).
+-   - Indicar amigablemente que lo agregaste (ej. "¡Listo! Ya agregué 2kg de Asado de Tira al carrito.").
+-   - Devolver ACTIONS_JSON:[{"action":"add_to_cart","product_id":1,"qty":2}] al final del mensaje.
+-2. Si el usuario te da sus datos de entrega/pago, debes rellenar el formulario. Ejemplo: "Me llamo Juan, vivo en Calle 3 y pago con débito" -> responde confirmando (ej. "Perfecto Juan, ya tomé tu dirección y método de pago.") y añade ACTIONS_JSON:[{"action":"fill_checkout_form","name":"Juan","address":"Calle 3","paymentMethod":"debito"}]
+-3. Si el usuario quiere comprar o finalizar, primero revisa si ya tienes los datos (Nombre, Dirección, Teléfono). Si no los tienes, solicítalos amigablemente. Si ya los tienes o el usuario los ingresó, abre checkout y ejecuta: ACTIONS_JSON:[{"action":"submit_order"}].
+-4. Siempre mantén una actitud amable, profesional y usa español de Uruguay (rioplatense, voseo si es natural).
+-5. Sé conciso. No inventes productos ni precios que no estén en el catálogo.
+-6. Si el usuario te consulta sobre la disponibilidad, stock o existencia de algún tipo de producto (ej. "¿tienen queso?", "¿hay cerveza?", "¿qué cortes de carne tenés?"), DEBES filtrar el catálogo para mostrar la selección correspondiente en la pantalla del usuario. Responde indicando lo que hay disponible y devuelve al final ACTIONS_JSON:[{"action":"filter","query":"término"}] (por ejemplo, query: "queso" o "cerveza" o "carniceria").`;
++import { useRef } from 'react';
++import './App.css';
++import { PRODUCTS, CATEGORIES } from './data.js';
++
++import { useProducts } from './hooks/useProducts.js';
++import { useCart } from './hooks/useCart.js';
++import { useChat } from './hooks/useChat.js';
++
++import { Header } from './components/Header.jsx';
++import { HeroBanner } from './components/HeroBanner.jsx';
++import { CategoryNav } from './components/CategoryNav.jsx';
++import { ProductCard } from './components/ProductCard.jsx';
++import { Cart } from './components/Cart.jsx';
++import { ChatAssistant } from './components/ChatAssistant.jsx';
++import { Footer } from './components/Footer.jsx';
+ 
+ export default function App() {
+-  // Cart state
+-  const [cart, setCart] = useState([]);
+-  const [isCartOpen, setIsCartOpen] = useState(false);
+-  const [isCheckout, setIsCheckout] = useState(false);
+-  const [badgeAnim, setBadgeAnim] = useState('');
+-
+-  // Filter state
+-  const [activeCategory, setActiveCategory] = useState('todo');
+-  const [searchQuery, setSearchQuery] = useState('');
+-
+-  // Dropdown state
+-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+-  const dropdownRef = useRef(null);
+-
+-  // Chat state
+-  const [isChatOpen, setIsChatOpen] = useState(true);
+-  const [chatMessages, setChatMessages] = useState([
+-    { role: 'assistant', content: '¡Hola! Soy el asistente virtual de **Bello Mercado** 🥩\n\nEstoy aquí para ayudarte en todo lo que necesites. Puedo **buscar productos**, **agregarlos directamente al carrito** por vos, o **guiarte en la navegación** de la página (como abrir el carrito, ir al checkout y confirmar el pedido).\n\n¿En qué puedo ayudarte hoy? ¡Probá decirme *"Agregá 2kg de asado al carrito"* o *"Mostrame las bebidas"*!', rawContent: '¡Hola! Soy el asistente virtual de **Bello Mercado** 🥩\n\nEstoy aquí para ayudarte en todo lo que necesites. Puedo **buscar productos**, **agregarlos directamente al carrito** por vos, o **guiarte en la navegación** de la página (como abrir el carrito, ir al checkout y confirmar el pedido).\n\n¿En qué puedo ayudarte hoy? ¡Probá decirme *"Agregá 2kg de asado al carrito"* o *"Mostrame las bebidas"*!' }
+-  ]);
+-  const [chatInput, setChatInput] = useState('');
+-  const [isChatLoading, setIsChatLoading] = useState(false);
+-  const chatEndRef = useRef(null);
+-  const chatInputRef = useRef(null);
+   const productsRef = useRef(null);
+ 
+-  // Form state
+-  const [formData, setFormData] = useState({
+-    name: '', address: '', phone: '',
+-    paymentMethod: 'efectivo', notes: '', cashAmount: ''
+-  });
+-
+-  // Scroll chat to bottom on new messages
+-  useEffect(() => {
+-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+-  }, [chatMessages]);
+-
+-  // Auto-focus chat input after loading finishes
+-  useEffect(() => {
+-    if (!isChatLoading && isChatOpen && chatInputRef.current) {
+-      chatInputRef.current.focus();
+-    }
+-  }, [isChatLoading, isChatOpen]);
+-
+-  // Click outside and Escape key dropdown listener
+-  useEffect(() => {
+-    if (!isDropdownOpen) return;
+-
+-    function handleDropdownClose(event) {
+-      if (event.type === 'mousedown') {
+-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+-          setIsDropdownOpen(false);
+-        }
+-      } else if (event.type === 'keydown') {
+-        if (event.key === 'Escape') {
+-          setIsDropdownOpen(false);
+-        }
+-      }
+-    }
+-    document.addEventListener('mousedown', handleDropdownClose);
+-    document.addEventListener('keydown', handleDropdownClose);
+-    return () => {
+-      document.removeEventListener('mousedown', handleDropdownClose);
+-      document.removeEventListener('keydown', handleDropdownClose);
+-    };
+-  }, [isDropdownOpen]);
+-
+-  const isExtraActive = EXTRA_CATEGORIES.some(cat => cat.id === activeCategory);
+-
+-  // ─── FILTERED PRODUCTS ─────────────────────────────────────────────────────
+-  const filteredProducts = PRODUCTS.filter(p => {
+-    const matchesCategory = activeCategory === 'todo' || p.category === activeCategory;
+-    const q = searchQuery.toLowerCase();
+-    const matchesSearch = !q ||
+-      p.name.toLowerCase().includes(q) ||
+-      p.category.toLowerCase().includes(q);
+-    return matchesCategory && matchesSearch;
++  const {
++    activeCategory, setActiveCategory,
++    searchQuery, setSearchQuery,
++    filteredProducts
++  } = useProducts();
++
++  const {
++    cart, setCart,
++    isCartOpen, setIsCartOpen,
++    isCheckout, setIsCheckout,
++    badgeAnim,
++    formData, setFormData,
++    addToCart, updateQty,
++    cartTotal, cartItemsCount,
++    crossSellProduct, hasCrossSell,
++    handleInputChange, handleCheckout, executeCheckout
++  } = useCart();
++
++  const {
++    isChatOpen, setIsChatOpen,
++    chatMessages,
++    chatInput, setChatInput,
++    isChatLoading,
++    chatEndRef, chatInputRef,
++    handleChatSend, handleChatKeyDown
++  } = useChat({
++    addToCart, cart, executeCheckout,
++    isCartOpen, setIsCartOpen,
++    isCheckout, setIsCheckout,
++    formData, setFormData,
++    setSearchQuery, setActiveCategory,
++    productsRef
+   });
+ 
+-  // ─── CART LOGIC ────────────────────────────────────────────────────────────
+-  const addToCart = (product, qty = 1) => {
+-    setCart(prev => {
+-      const existing = prev.find(item => item.id === product.id);
+-      if (existing) return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + qty } : item);
+-      return [...prev, { ...product, qty }];
+-    });
+-    setBadgeAnim('pop-anim');
+-    setTimeout(() => setBadgeAnim(''), 300);
+-  };
+-
+-  const updateQty = (id, delta) => {
+-    setCart(prev => prev.map(item => {
+-      if (item.id !== id) return item;
+-      const newQty = item.qty + delta;
+-      return newQty > 0 ? { ...item, qty: newQty } : item;
+-    }).filter(item => item.qty > 0));
+-  };
+-
+-  const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+-  const cartItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+-  const crossSellProduct = PRODUCTS.find(p => p.name.includes('Leña') && p.name.includes('chica'));
+-  const hasCrossSell = cart.some(item => item.id === crossSellProduct?.id);
+-
+-  const handleInputChange = (e) => {
+-    const { name, value } = e.target;
+-    setFormData(prev => ({ ...prev, [name]: value }));
+-  };
+-
+-  const executeCheckout = (data, cartToSubmit = cart) => {
+-    const totalToSubmit = cartToSubmit.reduce((sum, item) => sum + (item.price * item.qty), 0);
+-
+-    // Webhook for abandoned cart tracking
+-    fetch('https://n8n-n8n.bdfx4m.easypanel.host/webhook/bello-mercado-checkout', {
+-      method: 'POST',
+-      headers: { 'Content-Type': 'application/json' },
+-      body: JSON.stringify({ event: 'checkout_initiated', customer: data, cart: cartToSubmit, total: totalToSubmit })
+-    }).catch(() => {});
+-
+-    // WhatsApp message
+-    let message = `¡Hola, equipo de Bello Mercado! 👋\nQuiero hacer el siguiente pedido:\n\n`;
+-    message += `🛒 *Mi Carrito:*\n`;
+-    cartToSubmit.forEach(item => {
+-      message += `- ${item.qty} ${item.unit} x ${item.name} ($${item.price * item.qty})\n`;
+-    });
+-    message += `💰 *Total a pagar:* $${totalToSubmit}\n\n`;
+-    message += `📍 *Mis Datos:*\n`;
+-    message += `Nombre: ${data.name}\n`;
+-    message += `Dirección: ${data.address}\n`;
+-    message += `Teléfono: ${data.phone}\n`;
+-    let paymentStr = data.paymentMethod.toUpperCase();
+-    if (data.paymentMethod === 'efectivo' && data.cashAmount) {
+-      paymentStr += ` (Abona con $${data.cashAmount})`;
+-    }
+-    message += `Pago: ${paymentStr}\n`;
+-    if (data.notes) message += `📝 Notas: ${data.notes}\n`;
+-    message += `\n¿Me confirman para cuándo quedaría la entrega, por favor? ¡Gracias! 🥩`;
+-
+-    window.open(`https://wa.me/59893635208?text=${encodeURIComponent(message)}`, '_blank');
+-    setCart([]);
+-    setIsCartOpen(false);
+-    setIsCheckout(false);
+-  };
+-
+-  const handleCheckout = (e) => {
+-    e.preventDefault();
+-    executeCheckout(formData);
+-  };
+-
+-  // ─── CHAT LOGIC ────────────────────────────────────────────────────────────
+-  const handleChatSend = async () => {
+-    const userMsg = chatInput.trim();
+-    if (!userMsg || isChatLoading) return;
+-    setChatInput('');
+-    setChatMessages(prev => [...prev, { role: 'user', content: userMsg, rawContent: userMsg }]);
+-    setIsChatLoading(true);
+-
+-    try {
+-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+-        method: 'POST',
+-        headers: {
+-          'Content-Type': 'application/json',
+-          'Authorization': `Bearer ${OPENAI_API_KEY}`
+-        },
+-        body: JSON.stringify({
+-          model: 'gpt-4o-mini',
+-          messages: [
+-            { role: 'system', content: SYSTEM_PROMPT },
+-            ...chatMessages.map(m => ({ role: m.role, content: m.rawContent || m.content })),
+-            { role: 'user', content: userMsg }
+-          ],
+-          max_tokens: 600,
+-          temperature: 0.7
+-        })
+-      });
+-
+-      const data = await response.json();
+-      const fullContent = data.choices?.[0]?.message?.content || 'Lo siento, no pude procesar tu consulta.';
+-
+-      // Parse ACTIONS_JSON:[...] or fallback to plain JSON array, or extract individual objects
+-      let cleanContent = fullContent;
+-      let actions = [];
+-
+-      try {
+-        // 1. Try to extract a full array first (the proper way)
+-        const arrayRegex = /(?:ACTIONS_JSON:\s*)?(?:```(?:json)?\s*)?(\[[\s\S]*?\])(?:\s*```)?/;
+-        const arrayMatch = fullContent.match(arrayRegex);
+-        
+-        let parsedArray = false;
+-        if (arrayMatch) {
+-          try {
+-            const parsed = JSON.parse(arrayMatch[1]);
+-            if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].action) {
+-              actions = parsed;
+-              cleanContent = fullContent.replace(arrayMatch[0], '').trim();
+-              parsedArray = true;
+-            }
+-          } catch {
+-            // Ignore parse errors
+-          }
+-        }
+-
+-        // 2. Fallback: if no valid array was found, extract individual JSON objects (handles comma-separated bare objects)
+-        if (!parsedArray) {
+-          const objectRegex = /\{[^{]*?"action"\s*:\s*"[^"]+"[^}]*?\}/g;
+-          const matches = fullContent.match(objectRegex);
+-          if (matches) {
+-            matches.forEach(match => {
+-              try {
+-                const parsed = JSON.parse(match);
+-                if (parsed && parsed.action) {
+-                  actions.push(parsed);
+-                  cleanContent = cleanContent.replace(match, '');
+-                }
+-              } catch {
+-                // Ignore parse errors
+-              }
+-            });
+-            // Clean up leftover syntax artifacts
+-            cleanContent = cleanContent.replace(/ACTIONS_JSON:/g, '')
+-                                       .replace(/```json/g, '')
+-                                       .replace(/```/g, '')
+-                                       .replace(/[[\]]/g, '')
+-                                       .replace(/,\s*,/g, ',')
+-                                       .replace(/^[\s,]+|[\s,]+$/g, '')
+-                                       .trim();
+-          }
+-        }
+-      } catch (err) {
+-        console.error("Error parsing actions:", err);
+-      }
+-
+-      setChatMessages(prev => [...prev, { role: 'assistant', content: cleanContent, rawContent: fullContent }]);
+-
+-      // Process actions
+-      if (actions && actions.length > 0) {
+-        let currentForm = { ...formData };
+-        let currentCart = [...cart]; // Local synchronous cart tracking
+-        let shouldSubmit = false;
+-        let shouldOpenCart = isCartOpen;
+-        let shouldCheckout = isCheckout;
+-
+-        actions.forEach(act => {
+-          switch (act.action) {
+-            case 'filter':
+-              setSearchQuery(act.query || '');
+-              setActiveCategory('todo');
+-              setTimeout(() => {
+-                productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+-              }, 100);
+-              break;
+-              
+-            case 'add_to_cart': {
+-              const product = PRODUCTS.find(p => p.id === Number(act.product_id));
+-              if (product) {
+-                const qty = Number(act.qty) || 1;
+-                addToCart(product, qty);
+-                
+-                // Update local copy synchronously for immediate use in same tick
+-                const existingIndex = currentCart.findIndex(item => item.id === product.id);
+-                if (existingIndex > -1) {
+-                  currentCart[existingIndex] = {
+-                    ...currentCart[existingIndex],
+-                    qty: currentCart[existingIndex].qty + qty
+-                  };
+-                } else {
+-                  currentCart.push({ ...product, qty });
+-                }
+-              }
+-              break;
+-            }
+-              
+-            case 'open_cart':
+-              shouldOpenCart = true;
+-              shouldCheckout = false;
+-              break;
+-              
+-            case 'close_cart':
+-              shouldOpenCart = false;
+-              break;
+-              
+-            case 'start_checkout':
+-              shouldOpenCart = true;
+-              shouldCheckout = true;
+-              break;
+-              
+-            case 'fill_checkout_form':
+-              currentForm = {
+-                ...currentForm,
+-                name: act.name !== undefined && act.name !== null ? act.name : currentForm.name,
+-                address: act.address !== undefined && act.address !== null ? act.address : currentForm.address,
+-                phone: act.phone !== undefined && act.phone !== null ? act.phone : currentForm.phone,
+-                paymentMethod: act.paymentMethod !== undefined && act.paymentMethod !== null ? act.paymentMethod : currentForm.paymentMethod,
+-                cashAmount: act.cashAmount !== undefined && act.cashAmount !== null ? act.cashAmount : currentForm.cashAmount,
+-              };
+-              setFormData(currentForm);
+-              break;
+-              
+-            case 'submit_order':
+-              shouldSubmit = true;
+-              break;
+-
+-            default:
+-              console.warn("Acción desconocida:", act.action);
+-          }
+-        });
+-
+-        if (shouldOpenCart !== isCartOpen) setIsCartOpen(shouldOpenCart);
+-        if (shouldCheckout !== isCheckout) setIsCheckout(shouldCheckout);
+-
+-        if (shouldSubmit) {
+-          if (currentCart.length === 0) {
+-            setChatMessages(prev => [...prev, {
+-              role: 'assistant',
+-              content: '🛒 Tu carrito está vacío. ¡Agregá algunos productos antes de confirmar el pedido!'
+-            }]);
+-          } else if (!currentForm.name || !currentForm.address || !currentForm.phone) {
+-            setChatMessages(prev => [...prev, {
+-              role: 'assistant',
+-              content: '⚠️ Para finalizar el pedido, necesito que completes tus datos (Nombre, Dirección y Teléfono). Podés decírmelos por acá o completarlos manualmente en el formulario.'
+-            }]);
+-          } else {
+-            executeCheckout(currentForm, currentCart);
+-          }
+-        }
+-      }
+-
+-    } catch {
+-      setChatMessages(prev => [...prev, {
+-        role: 'assistant',
+-        content: '⚠️ Hubo un error al conectar con el asistente. Por favor, intentá de nuevo.'
+-      }]);
+-    } finally {
+-      setIsChatLoading(false);
+-    }
+-  };
+-
+-  const handleChatKeyDown = (e) => {
+-    if (e.key === 'Enter' && !e.shiftKey) {
+-      e.preventDefault();
+-      handleChatSend();
+-    }
+-  };
+-
+-  // Simple markdown bold renderer
+-  const renderMd = (text) => {
+-    const parts = text.split(/(\*\*.*?\*\*|\*.*?\*)/g);
+-    return parts.map((part, i) => {
+-      if (part.startsWith('**') && part.endsWith('**')) {
+-        return <strong key={i}>{part.slice(2, -2)}</strong>;
+-      }
+-      if (part.startsWith('*') && part.endsWith('*')) {
+-        return <em key={i}>{part.slice(1, -1)}</em>;
+-      }
+-      return <span key={i}>{part}</span>;
+-    });
+-  };
+-
+-  // ─── RENDER ────────────────────────────────────────────────────────────────
+   return (
+     <div className="app-container">
+-      {/* HEADER */}
+-      <header className="header">
+-        <div className="container header-content">
+-          <div className="logo">
+-            <span role="img" aria-label="carne" className="icon">🥩</span> Bello Mercado
+-          </div>
+-          <div className="header-actions">
+-            <button className="cart-icon" aria-label="Abrir carrito" onClick={() => setIsCartOpen(true)}>
+-              <span role="img" aria-label="carrito">🛒</span>
+-              {cartItemsCount > 0 && (
+-                <span className={`cart-badge ${badgeAnim}`}>{cartItemsCount}</span>
+-              )}
+-            </button>
+-          </div>
+-        </div>
+-      </header>
++      <Header cartItemsCount={cartItemsCount} badgeAnim={badgeAnim} setIsCartOpen={setIsCartOpen} />
+ 
+-      {/* MAIN */}
+       <main className="main-content container fade-in">
+-        {/* HERO BANNER */}
+-        <header className="hero-banner">
+-          <div className="hero-subtitle">Boutique de Carnes & Almacén Gourmet</div>
+-          <h1 className="hero-title">Bello Mercado</h1>
+-          <p style={{ color: 'var(--text-gray)', maxWidth: '650px', margin: '0 auto 1.5rem', fontSize: '1.05rem', fontFamily: 'var(--font-body)' }}>
+-            Los mejores cortes seleccionados, embutidos artesanales y delicatessen directo a tu puerta en Solymar.
+-          </p>
+-          <div className="hero-details">
+-            <div className="hero-detail-item">
+-              <span role="img" aria-label="ubicacion">📍</span> Rambla Costanera, Solymar
+-            </div>
+-            <div className="hero-detail-item">
+-              <span role="img" aria-label="reloj">⏰</span> Lun a Sáb: 9:00 a 20:00 | Dom: 9:00 a 14:00
+-            </div>
+-            <div className="hero-detail-item">
+-              <span role="img" aria-label="delivery">🛵</span> Envío a Domicilio Rápido
+-            </div>
+-          </div>
+-        </header>
++        <HeroBanner />
+ 
+-        {/* CATEGORY TABS */}
+-        <nav className="category-nav" aria-label="Categorías de productos">
+-          {MAIN_CATEGORIES.map(cat => (
+-            <button
+-              key={cat.id}
+-              className={`cat-tab ${activeCategory === cat.id ? 'active' : ''}`}
+-              onClick={() => {
+-                setActiveCategory(cat.id);
+-                setSearchQuery('');
+-                setIsDropdownOpen(false);
+-              }}
+-            >
+-              <span role="img" aria-hidden="true">{cat.emoji}</span> {cat.label}
+-            </button>
+-          ))}
++        <CategoryNav 
++          activeCategory={activeCategory} 
++          setActiveCategory={setActiveCategory} 
++          setSearchQuery={setSearchQuery} 
++        />
+ 
+-          <div className="category-dropdown-wrapper" ref={dropdownRef}>
+-            <button
+-              className={`cat-tab dropdown-toggle ${isExtraActive ? 'active' : ''}`}
+-              onClick={() => setIsDropdownOpen(prev => !prev)}
+-              aria-haspopup="true"
+-              aria-expanded={isDropdownOpen}
+-            >
+-              Más {isExtraActive ? `(${CATEGORIES.find(c => c.id === activeCategory)?.label})` : ''} ▼
+-            </button>
+-
+-            {isDropdownOpen && (
+-              <div className="category-dropdown glass-panel fade-in">
+-                {EXTRA_CATEGORIES.map(cat => (
+-                  <button
+-                    key={cat.id}
+-                    className={`dropdown-item ${activeCategory === cat.id ? 'active' : ''}`}
+-                    onClick={() => {
+-                      setActiveCategory(cat.id);
+-                      setSearchQuery('');
+-                      setIsDropdownOpen(false);
+-                    }}
+-                  >
+-                    <span role="img" aria-hidden="true">{cat.emoji}</span> {cat.label}
+-                  </button>
+-                ))}
+-              </div>
+-            )}
+-          </div>
+-        </nav>
+-
+-        {/* SEARCH BAR */}
+         {searchQuery && (
+           <div className="search-indicator fade-in">
+             <span>🔍 Resultados para: <strong>&quot;{searchQuery}&quot;</strong></span>
+@@ -504,7 +73,6 @@ export default function App() {
+           </div>
+         )}
+ 
+-        {/* CHEF'S RECOMMENDATION */}
+         {(activeCategory === 'todo' || activeCategory === 'carniceria') && !searchQuery && (
+           <div className="chef-rec-banner fade-in">
+             <div className="chef-rec-emoji">🥩</div>
+@@ -523,7 +91,6 @@ export default function App() {
+           </div>
+         )}
+ 
+-        {/* PRODUCTS GRID */}
+         <section className="products-section" ref={productsRef}>
+           <div className="section-header">
+             <h2 className="section-title">
+@@ -540,207 +107,32 @@ export default function App() {
+           ) : (
+             <div className="products-grid">
+               {filteredProducts.map(product => (
+-                <div key={product.id} className="product-card glass-panel">
+-                  {/* Product Badges */}
+-                  {(product.id === 1 || product.id === 3 || product.id === 6 || product.id === 35) && (
+-                    <span className="product-badge premium">Premium</span>
+-                  )}
+-                  {(product.id === 12 || product.id === 21 || product.id === 125) && (
+-                    <span className="product-badge casero">Casero</span>
+-                  )}
+-                  {(product.id === 77 || product.id === 157 || product.id === 57) && (
+-                    <span className="product-badge oferta">Oferta</span>
+-                  )}
+-
+-                  <div className="product-image-placeholder">
+-                    <span role="img" aria-label={product.name}>{product.emoji}</span>
+-                  </div>
+-                  <div className="product-info">
+-                    <h3 className="product-name">{product.name}</h3>
+-                    <div className="product-price">
+-                      ${product.price}
+-                      <span className="product-unit">/{product.unit}</span>
+-                    </div>
+-                    <button className="add-btn" onClick={() => addToCart(product)}>
+-                      + Agregar
+-                    </button>
+-                  </div>
+-                </div>
++                <ProductCard key={product.id} product={product} addToCart={addToCart} />
+               ))}
+             </div>
+           )}
+         </section>
+       </main>
+ 
+-      {/* CART SIDEBAR */}
+-      {isCartOpen && (
+-        <div className="cart-overlay" onClick={(e) => {
+-          if (e.target.className === 'cart-overlay') setIsCartOpen(false);
+-        }}>
+-          <aside className="cart-sidebar">
+-            <div className="cart-header">
+-              <h2>{isCheckout ? 'Finalizar Pedido' : 'Tu Pedido'}</h2>
+-              <button className="close-btn" aria-label="Cerrar carrito" onClick={() => setIsCartOpen(false)}>✕</button>
+-            </div>
+-
+-            {!isCheckout ? (
+-              <>
+-                <div className="cart-items">
+-                  {cart.length === 0 ? (
+-                    <div className="empty-cart">Tu carrito está vacío.</div>
+-                  ) : (
+-                    cart.map(item => (
+-                      <div key={item.id} className="cart-item">
+-                        <div className="cart-item-info">
+-                          <div className="cart-item-title">{item.emoji} {item.name}</div>
+-                          <div className="cart-item-price">${item.price} c/u · Total: ${item.price * item.qty}</div>
+-                        </div>
+-                        <div className="cart-item-actions">
+-                          <button className="qty-btn" aria-label="Restar" onClick={() => updateQty(item.id, -1)}>-</button>
+-                          <span className="item-qty">{item.qty}</span>
+-                          <button className="qty-btn" aria-label="Sumar" onClick={() => updateQty(item.id, 1)}>+</button>
+-                        </div>
+-                      </div>
+-                    ))
+-                  )}
+-                </div>
+-
+-                {cart.length > 0 && (
+-                  <div className="cart-footer">
+-                    {!hasCrossSell && crossSellProduct && (
+-                      <div className="cross-sell-banner">
+-                        <p>🔥 ¿Te falta algo para el asado?</p>
+-                        <button className="cross-sell-btn" onClick={() => addToCart(crossSellProduct)}>
+-                          + {crossSellProduct.name} (${crossSellProduct.price})
+-                        </button>
+-                      </div>
+-                    )}
+-                    <div className="cart-total">
+-                      <span>Total:</span>
+-                      <span>${cartTotal}</span>
+-                    </div>
+-                    <button className="checkout-btn" onClick={() => setIsCheckout(true)}>
+-                      Continuar al Envío →
+-                    </button>
+-                  </div>
+-                )}
+-              </>
+-            ) : (
+-              <form className="checkout-form" onSubmit={handleCheckout}>
+-                <button type="button" className="back-btn" onClick={() => setIsCheckout(false)}>
+-                  ← Volver al carrito
+-                </button>
+-
+-                <div className="form-group">
+-                  <label htmlFor="name">Nombre Completo</label>
+-                  <input id="name" required type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Ej. Juan Pérez" />
+-                </div>
+-                <div className="form-group">
+-                  <label htmlFor="address">Dirección de Envío</label>
+-                  <input id="address" required type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Calle, Número (Solymar)" />
+-                </div>
+-                <div className="form-group">
+-                  <label htmlFor="phone">Teléfono</label>
+-                  <input id="phone" required type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="09X XXX XXX" />
+-                </div>
+-                <div className="form-group">
+-                  <label htmlFor="paymentMethod">Pago al recibir</label>
+-                  <select id="paymentMethod" name="paymentMethod" value={formData.paymentMethod} onChange={handleInputChange}>
+-                    <option value="efectivo">Efectivo</option>
+-                    <option value="debito">Tarjeta de Débito</option>
+-                    <option value="credito">Tarjeta de Crédito</option>
+-                  </select>
+-                </div>
+-                {formData.paymentMethod === 'efectivo' && (
+-                  <div className="form-group fade-in">
+-                    <label htmlFor="cashAmount">¿Con cuánto abonas? (Para el cambio)</label>
+-                    <input id="cashAmount" type="number" name="cashAmount" value={formData.cashAmount} onChange={handleInputChange} placeholder="Ej. 1000" />
+-                  </div>
+-                )}
+-                <div className="form-group">
+-                  <label htmlFor="notes">Notas (Opcional)</label>
+-                  <textarea id="notes" name="notes" value={formData.notes} onChange={handleInputChange} placeholder="Instrucciones de preparación, timbre, etc." rows="2"></textarea>
+-                </div>
+-                <div className="cart-total" style={{ marginTop: '1rem', borderTop: '1px solid #333', paddingTop: '1rem' }}>
+-                  <span>A Pagar:</span>
+-                  <span>${cartTotal}</span>
+-                </div>
+-                <button type="submit" className="submit-btn">
+-                  Confirmar por WhatsApp 💬
+-                </button>
+-              </form>
+-            )}
+-          </aside>
+-        </div>
+-      )}
+-
+-      {/* CHAT WINDOW */}
+-      {isChatOpen && (
+-        <div className="chat-window glass-panel fade-in">
+-          <div className="chat-window-header">
+-            <div className="chat-title">
+-              <span className="chat-avatar">🤖</span>
+-              <div>
+-                <strong>Asistente Bello Mercado</strong>
+-                <span className="chat-status">● En línea</span>
+-              </div>
+-            </div>
+-            <button className="close-btn" aria-label="Cerrar chat" onClick={() => setIsChatOpen(false)}>✕</button>
+-          </div>
+-          <div className="chat-messages">
+-            {chatMessages.map((msg, idx) => (
+-              <div key={idx} className={`chat-bubble ${msg.role}`}>
+-                {msg.content.split('\n').map((line, i) => (
+-                  <p key={i} style={{ margin: '0.2rem 0' }}>{renderMd(line)}</p>
+-                ))}
+-              </div>
+-            ))}
+-            {isChatLoading && (
+-              <div className="chat-bubble assistant">
+-                <div className="typing-indicator">
+-                  <span></span><span></span><span></span>
+-                </div>
+-              </div>
+-            )}
+-            <div ref={chatEndRef} />
+-          </div>
+-          <div className="chat-input-row">
+-            <input
+-              ref={chatInputRef}
+-              type="text"
+-              className="chat-input"
+-              value={chatInput}
+-              onChange={(e) => setChatInput(e.target.value)}
+-              onKeyDown={handleChatKeyDown}
+-              placeholder="Ej: ¿Tienen asado? o Mostrame bebidas..."
+-              disabled={isChatLoading}
+-            />
+-            <button
+-              className="chat-send-btn"
+-              onClick={handleChatSend}
+-              disabled={!chatInput.trim() || isChatLoading}
+-              aria-label="Enviar mensaje"
+-            >
+-              ➤
+-            </button>
+-          </div>
+-        </div>
+-      )}
+-
+-      {/* CHAT TOGGLE BUTTON */}
+-      <button
+-        className="chat-fab"
+-        aria-label={isChatOpen ? 'Cerrar chat' : 'Abrir chat'}
+-        onClick={() => setIsChatOpen(prev => !prev)}
+-      >
+-        {isChatOpen ? '✕' : '💬'}
+-      </button>
+-
+-      <footer className="footer">
+-        <div className="container footer-text">
+-          <p>© 2026 Bello Mercado — Rambla Costanera, Solymar, Ciudad de la Costa. Tel: 2681 3030</p>
+-        </div>
+-      </footer>
++      <Cart 
++        isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen}
++        isCheckout={isCheckout} setIsCheckout={setIsCheckout}
++        cart={cart} updateQty={updateQty} addToCart={addToCart}
++        cartTotal={cartTotal} hasCrossSell={hasCrossSell}
++        crossSellProduct={crossSellProduct} formData={formData}
++        handleInputChange={handleInputChange} handleCheckout={handleCheckout}
++      />
++
++      <ChatAssistant 
++        isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen}
++        chatMessages={chatMessages}
++        chatInput={chatInput} setChatInput={setChatInput}
++        isChatLoading={isChatLoading}
++        handleChatSend={handleChatSend} handleChatKeyDown={handleChatKeyDown}
++        chatEndRef={chatEndRef} chatInputRef={chatInputRef}
++      />
++
++      <Footer />
+     </div>
+   );
+ }

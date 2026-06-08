@@ -1,0 +1,2350 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: tier1-features/f4-cart-management.spec.js >> F4: Cart Management >> Explicit remove button works
+- Location: e2e/tier1-features/f4-cart-management.spec.js:39:3
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: locator.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: /eliminar/i }).first()
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img "carne" [ref=e7]: 🥩
+        - text: Bello Mercado
+      - button "Abrir carrito" [active] [ref=e9] [cursor=pointer]:
+        - img "carrito" [ref=e10]: 🛒
+        - generic [ref=e11]: "1"
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: Boutique de Carnes & Almacén Gourmet
+      - heading "Bello Mercado" [level=1] [ref=e15]
+      - paragraph [ref=e16]: Los mejores cortes seleccionados, embutidos artesanales y delicatessen directo a tu puerta en Solymar.
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - img "ubicacion" [ref=e19]: 📍
+          - text: Rambla Costanera, Solymar
+        - generic [ref=e20]:
+          - img "reloj" [ref=e21]: ⏰
+          - text: "Lun a Sáb: 9:00 a 20:00 | Dom: 9:00 a 14:00"
+        - generic [ref=e22]:
+          - img "delivery" [ref=e23]: 🛵
+          - text: Envío a Domicilio Rápido
+    - textbox "🔍 Buscar productos..." [ref=e25]
+    - navigation "Categorías de productos" [ref=e26]:
+      - button "Todo" [ref=e27] [cursor=pointer]
+      - button "Carnicería" [ref=e28] [cursor=pointer]
+      - button "Fiambrería" [ref=e29] [cursor=pointer]
+      - button "Pollos y Aves" [ref=e30] [cursor=pointer]
+      - button "Cerdo" [ref=e31] [cursor=pointer]
+      - button "Más ▼" [ref=e33] [cursor=pointer]
+    - generic [ref=e34]:
+      - generic [ref=e35]: 🥩
+      - generic [ref=e36]:
+        - generic [ref=e37]: Recomendación de la Casa
+        - heading "Asado de Tira Premium" [level=3] [ref=e38]
+        - paragraph [ref=e39]: Corte clásico con la grasa de cobertura justa y un marmoleado excepcional. Ideal para lucirte en la parrilla el fin de semana.
+      - button "+ Agregar Asado ($390/kg)" [ref=e41] [cursor=pointer]
+    - generic [ref=e42]:
+      - heading "⭐ Productos Destacados" [level=2] [ref=e44]
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: Premium
+          - img "Asado de Tira" [ref=e49]
+          - generic [ref=e50]:
+            - heading "Asado de Tira" [level=3] [ref=e51]
+            - generic [ref=e52]:
+              - text: $390
+              - generic [ref=e53]: /kg
+            - generic [ref=e54]:
+              - generic [ref=e55]:
+                - button "-" [ref=e56] [cursor=pointer]
+                - generic [ref=e57]: "1"
+                - button "+" [ref=e58] [cursor=pointer]
+              - button "+ Agregar" [ref=e59] [cursor=pointer]
+        - generic [ref=e60]:
+          - generic [ref=e61]: Premium
+          - img "Colita de Cuadril" [ref=e63]
+          - generic [ref=e64]:
+            - heading "Colita de Cuadril" [level=3] [ref=e65]
+            - generic [ref=e66]:
+              - text: $490
+              - generic [ref=e67]: /kg
+            - generic [ref=e68]:
+              - generic [ref=e69]:
+                - button "-" [ref=e70] [cursor=pointer]
+                - generic [ref=e71]: "1"
+                - button "+" [ref=e72] [cursor=pointer]
+              - button "+ Agregar" [ref=e73] [cursor=pointer]
+        - generic [ref=e74]:
+          - generic [ref=e75]: Premium
+          - img "Lomo" [ref=e77]
+          - generic [ref=e78]:
+            - heading "Lomo" [level=3] [ref=e79]
+            - generic [ref=e80]:
+              - text: $850
+              - generic [ref=e81]: /kg
+            - generic [ref=e82]:
+              - generic [ref=e83]:
+                - button "-" [ref=e84] [cursor=pointer]
+                - generic [ref=e85]: "1"
+                - button "+" [ref=e86] [cursor=pointer]
+              - button "+ Agregar" [ref=e87] [cursor=pointer]
+        - generic [ref=e88]:
+          - generic [ref=e89]: Premium
+          - img "Prosciutto" [ref=e91]
+          - generic [ref=e92]:
+            - heading "Prosciutto" [level=3] [ref=e93]
+            - generic [ref=e94]:
+              - text: $920
+              - generic [ref=e95]: /kg
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - button "-" [ref=e98] [cursor=pointer]
+                - generic [ref=e99]: "1"
+                - button "+" [ref=e100] [cursor=pointer]
+              - button "+ Agregar" [ref=e101] [cursor=pointer]
+    - generic [ref=e102]:
+      - generic [ref=e103]:
+        - heading "Todo" [level=2] [ref=e104]
+        - generic [ref=e105]: 160 productos
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - generic [ref=e108]: Premium
+          - img "Asado de Tira" [ref=e110]
+          - generic [ref=e111]:
+            - heading "Asado de Tira" [level=3] [ref=e112]
+            - generic [ref=e113]:
+              - text: $390
+              - generic [ref=e114]: /kg
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - button "-" [ref=e117] [cursor=pointer]
+                - generic [ref=e118]: "1"
+                - button "+" [ref=e119] [cursor=pointer]
+              - button "+ Agregar" [ref=e120] [cursor=pointer]
+        - generic [ref=e121]:
+          - img "Vacío" [ref=e123]
+          - generic [ref=e124]:
+            - heading "Vacío" [level=3] [ref=e125]
+            - generic [ref=e126]:
+              - text: $420
+              - generic [ref=e127]: /kg
+            - generic [ref=e128]:
+              - generic [ref=e129]:
+                - button "-" [ref=e130] [cursor=pointer]
+                - generic [ref=e131]: "1"
+                - button "+" [ref=e132] [cursor=pointer]
+              - button "+ Agregar" [ref=e133] [cursor=pointer]
+        - generic [ref=e134]:
+          - generic [ref=e135]: Premium
+          - img "Colita de Cuadril" [ref=e137]
+          - generic [ref=e138]:
+            - heading "Colita de Cuadril" [level=3] [ref=e139]
+            - generic [ref=e140]:
+              - text: $490
+              - generic [ref=e141]: /kg
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - button "-" [ref=e144] [cursor=pointer]
+                - generic [ref=e145]: "1"
+                - button "+" [ref=e146] [cursor=pointer]
+              - button "+ Agregar" [ref=e147] [cursor=pointer]
+        - generic [ref=e148]:
+          - img "Cuadril Entero" [ref=e150]
+          - generic [ref=e151]:
+            - heading "Cuadril Entero" [level=3] [ref=e152]
+            - generic [ref=e153]:
+              - text: $520
+              - generic [ref=e154]: /kg
+            - generic [ref=e155]:
+              - generic [ref=e156]:
+                - button "-" [ref=e157] [cursor=pointer]
+                - generic [ref=e158]: "1"
+                - button "+" [ref=e159] [cursor=pointer]
+              - button "+ Agregar" [ref=e160] [cursor=pointer]
+        - generic [ref=e161]:
+          - img "Entrecot / Bife de Lomo" [ref=e163]
+          - generic [ref=e164]:
+            - heading "Entrecot / Bife de Lomo" [level=3] [ref=e165]
+            - generic [ref=e166]:
+              - text: $680
+              - generic [ref=e167]: /kg
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - button "-" [ref=e170] [cursor=pointer]
+                - generic [ref=e171]: "1"
+                - button "+" [ref=e172] [cursor=pointer]
+              - button "+ Agregar" [ref=e173] [cursor=pointer]
+        - generic [ref=e174]:
+          - generic [ref=e175]: Premium
+          - img "Lomo" [ref=e177]
+          - generic [ref=e178]:
+            - heading "Lomo" [level=3] [ref=e179]
+            - generic [ref=e180]:
+              - text: $850
+              - generic [ref=e181]: /kg
+            - generic [ref=e182]:
+              - generic [ref=e183]:
+                - button "-" [ref=e184] [cursor=pointer]
+                - generic [ref=e185]: "1"
+                - button "+" [ref=e186] [cursor=pointer]
+              - button "+ Agregar" [ref=e187] [cursor=pointer]
+        - generic [ref=e188]:
+          - img "Paleta" [ref=e190]
+          - generic [ref=e191]:
+            - heading "Paleta" [level=3] [ref=e192]
+            - generic [ref=e193]:
+              - text: $310
+              - generic [ref=e194]: /kg
+            - generic [ref=e195]:
+              - generic [ref=e196]:
+                - button "-" [ref=e197] [cursor=pointer]
+                - generic [ref=e198]: "1"
+                - button "+" [ref=e199] [cursor=pointer]
+              - button "+ Agregar" [ref=e200] [cursor=pointer]
+        - generic [ref=e201]:
+          - img "Aguja" [ref=e203]
+          - generic [ref=e204]:
+            - heading "Aguja" [level=3] [ref=e205]
+            - generic [ref=e206]:
+              - text: $270
+              - generic [ref=e207]: /kg
+            - generic [ref=e208]:
+              - generic [ref=e209]:
+                - button "-" [ref=e210] [cursor=pointer]
+                - generic [ref=e211]: "1"
+                - button "+" [ref=e212] [cursor=pointer]
+              - button "+ Agregar" [ref=e213] [cursor=pointer]
+        - generic [ref=e214]:
+          - img "Ossobuco" [ref=e216]
+          - generic [ref=e217]:
+            - heading "Ossobuco" [level=3] [ref=e218]
+            - generic [ref=e219]:
+              - text: $280
+              - generic [ref=e220]: /kg
+            - generic [ref=e221]:
+              - generic [ref=e222]:
+                - button "-" [ref=e223] [cursor=pointer]
+                - generic [ref=e224]: "1"
+                - button "+" [ref=e225] [cursor=pointer]
+              - button "+ Agregar" [ref=e226] [cursor=pointer]
+        - generic [ref=e227]:
+          - img "Osobuco de Cerdo" [ref=e229]
+          - generic [ref=e230]:
+            - heading "Osobuco de Cerdo" [level=3] [ref=e231]
+            - generic [ref=e232]:
+              - text: $260
+              - generic [ref=e233]: /kg
+            - generic [ref=e234]:
+              - generic [ref=e235]:
+                - button "-" [ref=e236] [cursor=pointer]
+                - generic [ref=e237]: "1"
+                - button "+" [ref=e238] [cursor=pointer]
+              - button "+ Agregar" [ref=e239] [cursor=pointer]
+        - generic [ref=e240]:
+          - img "Carnaza" [ref=e242]
+          - generic [ref=e243]:
+            - heading "Carnaza" [level=3] [ref=e244]
+            - generic [ref=e245]:
+              - text: $250
+              - generic [ref=e246]: /kg
+            - generic [ref=e247]:
+              - generic [ref=e248]:
+                - button "-" [ref=e249] [cursor=pointer]
+                - generic [ref=e250]: "1"
+                - button "+" [ref=e251] [cursor=pointer]
+              - button "+ Agregar" [ref=e252] [cursor=pointer]
+        - generic [ref=e253]:
+          - generic [ref=e254]: Casero
+          - img "Milanesas de Carne" [ref=e256]
+          - generic [ref=e257]:
+            - heading "Milanesas de Carne" [level=3] [ref=e258]
+            - generic [ref=e259]:
+              - text: $390
+              - generic [ref=e260]: /kg
+            - generic [ref=e261]:
+              - generic [ref=e262]:
+                - button "-" [ref=e263] [cursor=pointer]
+                - generic [ref=e264]: "1"
+                - button "+" [ref=e265] [cursor=pointer]
+              - button "+ Agregar" [ref=e266] [cursor=pointer]
+        - generic [ref=e267]:
+          - img "Carne Picada" [ref=e269]
+          - generic [ref=e270]:
+            - heading "Carne Picada" [level=3] [ref=e271]
+            - generic [ref=e272]:
+              - text: $300
+              - generic [ref=e273]: /kg
+            - generic [ref=e274]:
+              - generic [ref=e275]:
+                - button "-" [ref=e276] [cursor=pointer]
+                - generic [ref=e277]: "1"
+                - button "+" [ref=e278] [cursor=pointer]
+              - button "+ Agregar" [ref=e279] [cursor=pointer]
+        - generic [ref=e280]:
+          - img "Mondongo" [ref=e282]
+          - generic [ref=e283]:
+            - heading "Mondongo" [level=3] [ref=e284]
+            - generic [ref=e285]:
+              - text: $200
+              - generic [ref=e286]: /kg
+            - generic [ref=e287]:
+              - generic [ref=e288]:
+                - button "-" [ref=e289] [cursor=pointer]
+                - generic [ref=e290]: "1"
+                - button "+" [ref=e291] [cursor=pointer]
+              - button "+ Agregar" [ref=e292] [cursor=pointer]
+        - generic [ref=e293]:
+          - img "Riñones" [ref=e295]
+          - generic [ref=e296]:
+            - heading "Riñones" [level=3] [ref=e297]
+            - generic [ref=e298]:
+              - text: $180
+              - generic [ref=e299]: /kg
+            - generic [ref=e300]:
+              - generic [ref=e301]:
+                - button "-" [ref=e302] [cursor=pointer]
+                - generic [ref=e303]: "1"
+                - button "+" [ref=e304] [cursor=pointer]
+              - button "+ Agregar" [ref=e305] [cursor=pointer]
+        - generic [ref=e306]:
+          - img "Chinchulines" [ref=e308]
+          - generic [ref=e309]:
+            - heading "Chinchulines" [level=3] [ref=e310]
+            - generic [ref=e311]:
+              - text: $220
+              - generic [ref=e312]: /kg
+            - generic [ref=e313]:
+              - generic [ref=e314]:
+                - button "-" [ref=e315] [cursor=pointer]
+                - generic [ref=e316]: "1"
+                - button "+" [ref=e317] [cursor=pointer]
+              - button "+ Agregar" [ref=e318] [cursor=pointer]
+        - generic [ref=e319]:
+          - img "Mollejas" [ref=e321]
+          - generic [ref=e322]:
+            - heading "Mollejas" [level=3] [ref=e323]
+            - generic [ref=e324]:
+              - text: $350
+              - generic [ref=e325]: /kg
+            - generic [ref=e326]:
+              - generic [ref=e327]:
+                - button "-" [ref=e328] [cursor=pointer]
+                - generic [ref=e329]: "1"
+                - button "+" [ref=e330] [cursor=pointer]
+              - button "+ Agregar" [ref=e331] [cursor=pointer]
+        - generic [ref=e332]:
+          - img "Morcilla" [ref=e334]
+          - generic [ref=e335]:
+            - heading "Morcilla" [level=3] [ref=e336]
+            - generic [ref=e337]:
+              - text: $280
+              - generic [ref=e338]: /kg
+            - generic [ref=e339]:
+              - generic [ref=e340]:
+                - button "-" [ref=e341] [cursor=pointer]
+                - generic [ref=e342]: "1"
+                - button "+" [ref=e343] [cursor=pointer]
+              - button "+ Agregar" [ref=e344] [cursor=pointer]
+        - generic [ref=e345]:
+          - img "Costillas Vacuna" [ref=e347]
+          - generic [ref=e348]:
+            - heading "Costillas Vacuna" [level=3] [ref=e349]
+            - generic [ref=e350]:
+              - text: $340
+              - generic [ref=e351]: /kg
+            - generic [ref=e352]:
+              - generic [ref=e353]:
+                - button "-" [ref=e354] [cursor=pointer]
+                - generic [ref=e355]: "1"
+                - button "+" [ref=e356] [cursor=pointer]
+              - button "+ Agregar" [ref=e357] [cursor=pointer]
+        - generic [ref=e358]:
+          - img "Bife Ancho" [ref=e360]
+          - generic [ref=e361]:
+            - heading "Bife Ancho" [level=3] [ref=e362]
+            - generic [ref=e363]:
+              - text: $590
+              - generic [ref=e364]: /kg
+            - generic [ref=e365]:
+              - generic [ref=e366]:
+                - button "-" [ref=e367] [cursor=pointer]
+                - generic [ref=e368]: "1"
+                - button "+" [ref=e369] [cursor=pointer]
+              - button "+ Agregar" [ref=e370] [cursor=pointer]
+        - generic [ref=e371]:
+          - generic [ref=e372]: Casero
+          - img "Chorizos Caseros" [ref=e374]
+          - generic [ref=e375]:
+            - heading "Chorizos Caseros" [level=3] [ref=e376]
+            - generic [ref=e377]:
+              - text: $360
+              - generic [ref=e378]: /kg
+            - generic [ref=e379]:
+              - generic [ref=e380]:
+                - button "-" [ref=e381] [cursor=pointer]
+                - generic [ref=e382]: "1"
+                - button "+" [ref=e383] [cursor=pointer]
+              - button "+ Agregar" [ref=e384] [cursor=pointer]
+        - generic [ref=e385]:
+          - img "Salame Tipo Milano" [ref=e387]
+          - generic [ref=e388]:
+            - heading "Salame Tipo Milano" [level=3] [ref=e389]
+            - generic [ref=e390]:
+              - text: $580
+              - generic [ref=e391]: /kg
+            - generic [ref=e392]:
+              - generic [ref=e393]:
+                - button "-" [ref=e394] [cursor=pointer]
+                - generic [ref=e395]: "1"
+                - button "+" [ref=e396] [cursor=pointer]
+              - button "+ Agregar" [ref=e397] [cursor=pointer]
+        - generic [ref=e398]:
+          - img "Jamón Cocido" [ref=e400]
+          - generic [ref=e401]:
+            - heading "Jamón Cocido" [level=3] [ref=e402]
+            - generic [ref=e403]:
+              - text: $420
+              - generic [ref=e404]: /kg
+            - generic [ref=e405]:
+              - generic [ref=e406]:
+                - button "-" [ref=e407] [cursor=pointer]
+                - generic [ref=e408]: "1"
+                - button "+" [ref=e409] [cursor=pointer]
+              - button "+ Agregar" [ref=e410] [cursor=pointer]
+        - generic [ref=e411]:
+          - img "Jamón Crudo" [ref=e413]
+          - generic [ref=e414]:
+            - heading "Jamón Crudo" [level=3] [ref=e415]
+            - generic [ref=e416]:
+              - text: $650
+              - generic [ref=e417]: /kg
+            - generic [ref=e418]:
+              - generic [ref=e419]:
+                - button "-" [ref=e420] [cursor=pointer]
+                - generic [ref=e421]: "1"
+                - button "+" [ref=e422] [cursor=pointer]
+              - button "+ Agregar" [ref=e423] [cursor=pointer]
+        - generic [ref=e424]:
+          - img "Mortadela" [ref=e426]
+          - generic [ref=e427]:
+            - heading "Mortadela" [level=3] [ref=e428]
+            - generic [ref=e429]:
+              - text: $320
+              - generic [ref=e430]: /kg
+            - generic [ref=e431]:
+              - generic [ref=e432]:
+                - button "-" [ref=e433] [cursor=pointer]
+                - generic [ref=e434]: "1"
+                - button "+" [ref=e435] [cursor=pointer]
+              - button "+ Agregar" [ref=e436] [cursor=pointer]
+        - generic [ref=e437]:
+          - img "Paleta Cocida" [ref=e439]
+          - generic [ref=e440]:
+            - heading "Paleta Cocida" [level=3] [ref=e441]
+            - generic [ref=e442]:
+              - text: $380
+              - generic [ref=e443]: /kg
+            - generic [ref=e444]:
+              - generic [ref=e445]:
+                - button "-" [ref=e446] [cursor=pointer]
+                - generic [ref=e447]: "1"
+                - button "+" [ref=e448] [cursor=pointer]
+              - button "+ Agregar" [ref=e449] [cursor=pointer]
+        - generic [ref=e450]:
+          - img "Lomito Ahumado" [ref=e452]
+          - generic [ref=e453]:
+            - heading "Lomito Ahumado" [level=3] [ref=e454]
+            - generic [ref=e455]:
+              - text: $720
+              - generic [ref=e456]: /kg
+            - generic [ref=e457]:
+              - generic [ref=e458]:
+                - button "-" [ref=e459] [cursor=pointer]
+                - generic [ref=e460]: "1"
+                - button "+" [ref=e461] [cursor=pointer]
+              - button "+ Agregar" [ref=e462] [cursor=pointer]
+        - generic [ref=e463]:
+          - img "Queso Feta" [ref=e465]
+          - generic [ref=e466]:
+            - heading "Queso Feta" [level=3] [ref=e467]
+            - generic [ref=e468]:
+              - text: $540
+              - generic [ref=e469]: /kg
+            - generic [ref=e470]:
+              - generic [ref=e471]:
+                - button "-" [ref=e472] [cursor=pointer]
+                - generic [ref=e473]: "1"
+                - button "+" [ref=e474] [cursor=pointer]
+              - button "+ Agregar" [ref=e475] [cursor=pointer]
+        - generic [ref=e476]:
+          - img "Queso Colonia" [ref=e478]
+          - generic [ref=e479]:
+            - heading "Queso Colonia" [level=3] [ref=e480]
+            - generic [ref=e481]:
+              - text: $480
+              - generic [ref=e482]: /kg
+            - generic [ref=e483]:
+              - generic [ref=e484]:
+                - button "-" [ref=e485] [cursor=pointer]
+                - generic [ref=e486]: "1"
+                - button "+" [ref=e487] [cursor=pointer]
+              - button "+ Agregar" [ref=e488] [cursor=pointer]
+        - generic [ref=e489]:
+          - img "Queso Dambo" [ref=e491]
+          - generic [ref=e492]:
+            - heading "Queso Dambo" [level=3] [ref=e493]
+            - generic [ref=e494]:
+              - text: $450
+              - generic [ref=e495]: /kg
+            - generic [ref=e496]:
+              - generic [ref=e497]:
+                - button "-" [ref=e498] [cursor=pointer]
+                - generic [ref=e499]: "1"
+                - button "+" [ref=e500] [cursor=pointer]
+              - button "+ Agregar" [ref=e501] [cursor=pointer]
+        - generic [ref=e502]:
+          - img "Queso Parmesano" [ref=e504]
+          - generic [ref=e505]:
+            - heading "Queso Parmesano" [level=3] [ref=e506]
+            - generic [ref=e507]:
+              - text: $680
+              - generic [ref=e508]: /kg
+            - generic [ref=e509]:
+              - generic [ref=e510]:
+                - button "-" [ref=e511] [cursor=pointer]
+                - generic [ref=e512]: "1"
+                - button "+" [ref=e513] [cursor=pointer]
+              - button "+ Agregar" [ref=e514] [cursor=pointer]
+        - generic [ref=e515]:
+          - img "Queso Mozzarella" [ref=e517]
+          - generic [ref=e518]:
+            - heading "Queso Mozzarella" [level=3] [ref=e519]
+            - generic [ref=e520]:
+              - text: $510
+              - generic [ref=e521]: /kg
+            - generic [ref=e522]:
+              - generic [ref=e523]:
+                - button "-" [ref=e524] [cursor=pointer]
+                - generic [ref=e525]: "1"
+                - button "+" [ref=e526] [cursor=pointer]
+              - button "+ Agregar" [ref=e527] [cursor=pointer]
+        - generic [ref=e528]:
+          - img "Salchichas Frankfurt" [ref=e530]
+          - generic [ref=e531]:
+            - heading "Salchichas Frankfurt" [level=3] [ref=e532]
+            - generic [ref=e533]:
+              - text: $290
+              - generic [ref=e534]: /kg
+            - generic [ref=e535]:
+              - generic [ref=e536]:
+                - button "-" [ref=e537] [cursor=pointer]
+                - generic [ref=e538]: "1"
+                - button "+" [ref=e539] [cursor=pointer]
+              - button "+ Agregar" [ref=e540] [cursor=pointer]
+        - generic [ref=e541]:
+          - img "Pastrami" [ref=e543]
+          - generic [ref=e544]:
+            - heading "Pastrami" [level=3] [ref=e545]
+            - generic [ref=e546]:
+              - text: $780
+              - generic [ref=e547]: /kg
+            - generic [ref=e548]:
+              - generic [ref=e549]:
+                - button "-" [ref=e550] [cursor=pointer]
+                - generic [ref=e551]: "1"
+                - button "+" [ref=e552] [cursor=pointer]
+              - button "+ Agregar" [ref=e553] [cursor=pointer]
+        - generic [ref=e554]:
+          - generic [ref=e555]: Premium
+          - img "Prosciutto" [ref=e557]
+          - generic [ref=e558]:
+            - heading "Prosciutto" [level=3] [ref=e559]
+            - generic [ref=e560]:
+              - text: $920
+              - generic [ref=e561]: /kg
+            - generic [ref=e562]:
+              - generic [ref=e563]:
+                - button "-" [ref=e564] [cursor=pointer]
+                - generic [ref=e565]: "1"
+                - button "+" [ref=e566] [cursor=pointer]
+              - button "+ Agregar" [ref=e567] [cursor=pointer]
+        - generic [ref=e568]:
+          - img "Pollo Entero" [ref=e570]
+          - generic [ref=e571]:
+            - heading "Pollo Entero" [level=3] [ref=e572]
+            - generic [ref=e573]:
+              - text: $185
+              - generic [ref=e574]: /kg
+            - generic [ref=e575]:
+              - generic [ref=e576]:
+                - button "-" [ref=e577] [cursor=pointer]
+                - generic [ref=e578]: "1"
+                - button "+" [ref=e579] [cursor=pointer]
+              - button "+ Agregar" [ref=e580] [cursor=pointer]
+        - generic [ref=e581]:
+          - img "Pechuga de Pollo" [ref=e583]
+          - generic [ref=e584]:
+            - heading "Pechuga de Pollo" [level=3] [ref=e585]
+            - generic [ref=e586]:
+              - text: $290
+              - generic [ref=e587]: /kg
+            - generic [ref=e588]:
+              - generic [ref=e589]:
+                - button "-" [ref=e590] [cursor=pointer]
+                - generic [ref=e591]: "1"
+                - button "+" [ref=e592] [cursor=pointer]
+              - button "+ Agregar" [ref=e593] [cursor=pointer]
+        - generic [ref=e594]:
+          - img "Muslo de Pollo" [ref=e596]
+          - generic [ref=e597]:
+            - heading "Muslo de Pollo" [level=3] [ref=e598]
+            - generic [ref=e599]:
+              - text: $220
+              - generic [ref=e600]: /kg
+            - generic [ref=e601]:
+              - generic [ref=e602]:
+                - button "-" [ref=e603] [cursor=pointer]
+                - generic [ref=e604]: "1"
+                - button "+" [ref=e605] [cursor=pointer]
+              - button "+ Agregar" [ref=e606] [cursor=pointer]
+        - generic [ref=e607]:
+          - img "Alitas de Pollo" [ref=e609]
+          - generic [ref=e610]:
+            - heading "Alitas de Pollo" [level=3] [ref=e611]
+            - generic [ref=e612]:
+              - text: $210
+              - generic [ref=e613]: /kg
+            - generic [ref=e614]:
+              - generic [ref=e615]:
+                - button "-" [ref=e616] [cursor=pointer]
+                - generic [ref=e617]: "1"
+                - button "+" [ref=e618] [cursor=pointer]
+              - button "+ Agregar" [ref=e619] [cursor=pointer]
+        - generic [ref=e620]:
+          - img "Milanesas de Pollo" [ref=e622]
+          - generic [ref=e623]:
+            - heading "Milanesas de Pollo" [level=3] [ref=e624]
+            - generic [ref=e625]:
+              - text: $310
+              - generic [ref=e626]: /kg
+            - generic [ref=e627]:
+              - generic [ref=e628]:
+                - button "-" [ref=e629] [cursor=pointer]
+                - generic [ref=e630]: "1"
+                - button "+" [ref=e631] [cursor=pointer]
+              - button "+ Agregar" [ref=e632] [cursor=pointer]
+        - generic [ref=e633]:
+          - img "Suprema de Pollo" [ref=e635]
+          - generic [ref=e636]:
+            - heading "Suprema de Pollo" [level=3] [ref=e637]
+            - generic [ref=e638]:
+              - text: $330
+              - generic [ref=e639]: /kg
+            - generic [ref=e640]:
+              - generic [ref=e641]:
+                - button "-" [ref=e642] [cursor=pointer]
+                - generic [ref=e643]: "1"
+                - button "+" [ref=e644] [cursor=pointer]
+              - button "+ Agregar" [ref=e645] [cursor=pointer]
+        - generic [ref=e646]:
+          - img "Corazones de Pollo" [ref=e648]
+          - generic [ref=e649]:
+            - heading "Corazones de Pollo" [level=3] [ref=e650]
+            - generic [ref=e651]:
+              - text: $190
+              - generic [ref=e652]: /kg
+            - generic [ref=e653]:
+              - generic [ref=e654]:
+                - button "-" [ref=e655] [cursor=pointer]
+                - generic [ref=e656]: "1"
+                - button "+" [ref=e657] [cursor=pointer]
+              - button "+ Agregar" [ref=e658] [cursor=pointer]
+        - generic [ref=e659]:
+          - img "Pato Entero" [ref=e661]
+          - generic [ref=e662]:
+            - heading "Pato Entero" [level=3] [ref=e663]
+            - generic [ref=e664]:
+              - text: $420
+              - generic [ref=e665]: /kg
+            - generic [ref=e666]:
+              - generic [ref=e667]:
+                - button "-" [ref=e668] [cursor=pointer]
+                - generic [ref=e669]: "1"
+                - button "+" [ref=e670] [cursor=pointer]
+              - button "+ Agregar" [ref=e671] [cursor=pointer]
+        - generic [ref=e672]:
+          - img "Bondiola de Cerdo" [ref=e674]
+          - generic [ref=e675]:
+            - heading "Bondiola de Cerdo" [level=3] [ref=e676]
+            - generic [ref=e677]:
+              - text: $330
+              - generic [ref=e678]: /kg
+            - generic [ref=e679]:
+              - generic [ref=e680]:
+                - button "-" [ref=e681] [cursor=pointer]
+                - generic [ref=e682]: "1"
+                - button "+" [ref=e683] [cursor=pointer]
+              - button "+ Agregar" [ref=e684] [cursor=pointer]
+        - generic [ref=e685]:
+          - img "Costillas de Cerdo" [ref=e687]
+          - generic [ref=e688]:
+            - heading "Costillas de Cerdo" [level=3] [ref=e689]
+            - generic [ref=e690]:
+              - text: $310
+              - generic [ref=e691]: /kg
+            - generic [ref=e692]:
+              - generic [ref=e693]:
+                - button "-" [ref=e694] [cursor=pointer]
+                - generic [ref=e695]: "1"
+                - button "+" [ref=e696] [cursor=pointer]
+              - button "+ Agregar" [ref=e697] [cursor=pointer]
+        - generic [ref=e698]:
+          - img "Lomo de Cerdo" [ref=e700]
+          - generic [ref=e701]:
+            - heading "Lomo de Cerdo" [level=3] [ref=e702]
+            - generic [ref=e703]:
+              - text: $380
+              - generic [ref=e704]: /kg
+            - generic [ref=e705]:
+              - generic [ref=e706]:
+                - button "-" [ref=e707] [cursor=pointer]
+                - generic [ref=e708]: "1"
+                - button "+" [ref=e709] [cursor=pointer]
+              - button "+ Agregar" [ref=e710] [cursor=pointer]
+        - generic [ref=e711]:
+          - img "Panceta Fresca" [ref=e713]
+          - generic [ref=e714]:
+            - heading "Panceta Fresca" [level=3] [ref=e715]
+            - generic [ref=e716]:
+              - text: $290
+              - generic [ref=e717]: /kg
+            - generic [ref=e718]:
+              - generic [ref=e719]:
+                - button "-" [ref=e720] [cursor=pointer]
+                - generic [ref=e721]: "1"
+                - button "+" [ref=e722] [cursor=pointer]
+              - button "+ Agregar" [ref=e723] [cursor=pointer]
+        - generic [ref=e724]:
+          - img "Panceta Ahumada" [ref=e726]
+          - generic [ref=e727]:
+            - heading "Panceta Ahumada" [level=3] [ref=e728]
+            - generic [ref=e729]:
+              - text: $360
+              - generic [ref=e730]: /kg
+            - generic [ref=e731]:
+              - generic [ref=e732]:
+                - button "-" [ref=e733] [cursor=pointer]
+                - generic [ref=e734]: "1"
+                - button "+" [ref=e735] [cursor=pointer]
+              - button "+ Agregar" [ref=e736] [cursor=pointer]
+        - generic [ref=e737]:
+          - img "Pernil de Cerdo" [ref=e739]
+          - generic [ref=e740]:
+            - heading "Pernil de Cerdo" [level=3] [ref=e741]
+            - generic [ref=e742]:
+              - text: $340
+              - generic [ref=e743]: /kg
+            - generic [ref=e744]:
+              - generic [ref=e745]:
+                - button "-" [ref=e746] [cursor=pointer]
+                - generic [ref=e747]: "1"
+                - button "+" [ref=e748] [cursor=pointer]
+              - button "+ Agregar" [ref=e749] [cursor=pointer]
+        - generic [ref=e750]:
+          - img "Chuletas de Cerdo" [ref=e752]
+          - generic [ref=e753]:
+            - heading "Chuletas de Cerdo" [level=3] [ref=e754]
+            - generic [ref=e755]:
+              - text: $320
+              - generic [ref=e756]: /kg
+            - generic [ref=e757]:
+              - generic [ref=e758]:
+                - button "-" [ref=e759] [cursor=pointer]
+                - generic [ref=e760]: "1"
+                - button "+" [ref=e761] [cursor=pointer]
+              - button "+ Agregar" [ref=e762] [cursor=pointer]
+        - generic [ref=e763]:
+          - img "Filete de Merluza" [ref=e765]
+          - generic [ref=e766]:
+            - heading "Filete de Merluza" [level=3] [ref=e767]
+            - generic [ref=e768]:
+              - text: $380
+              - generic [ref=e769]: /kg
+            - generic [ref=e770]:
+              - generic [ref=e771]:
+                - button "-" [ref=e772] [cursor=pointer]
+                - generic [ref=e773]: "1"
+                - button "+" [ref=e774] [cursor=pointer]
+              - button "+ Agregar" [ref=e775] [cursor=pointer]
+        - generic [ref=e776]:
+          - img "Lenguado Fresco" [ref=e778]
+          - generic [ref=e779]:
+            - heading "Lenguado Fresco" [level=3] [ref=e780]
+            - generic [ref=e781]:
+              - text: $490
+              - generic [ref=e782]: /kg
+            - generic [ref=e783]:
+              - generic [ref=e784]:
+                - button "-" [ref=e785] [cursor=pointer]
+                - generic [ref=e786]: "1"
+                - button "+" [ref=e787] [cursor=pointer]
+              - button "+ Agregar" [ref=e788] [cursor=pointer]
+        - generic [ref=e789]:
+          - img "Camarones" [ref=e791]
+          - generic [ref=e792]:
+            - heading "Camarones" [level=3] [ref=e793]
+            - generic [ref=e794]:
+              - text: $620
+              - generic [ref=e795]: /kg
+            - generic [ref=e796]:
+              - generic [ref=e797]:
+                - button "-" [ref=e798] [cursor=pointer]
+                - generic [ref=e799]: "1"
+                - button "+" [ref=e800] [cursor=pointer]
+              - button "+ Agregar" [ref=e801] [cursor=pointer]
+        - generic [ref=e802]:
+          - img "Mejillones" [ref=e804]
+          - generic [ref=e805]:
+            - heading "Mejillones" [level=3] [ref=e806]
+            - generic [ref=e807]:
+              - text: $280
+              - generic [ref=e808]: /kg
+            - generic [ref=e809]:
+              - generic [ref=e810]:
+                - button "-" [ref=e811] [cursor=pointer]
+                - generic [ref=e812]: "1"
+                - button "+" [ref=e813] [cursor=pointer]
+              - button "+ Agregar" [ref=e814] [cursor=pointer]
+        - generic [ref=e815]:
+          - img "Atún en Lata (x3)" [ref=e817]
+          - generic [ref=e818]:
+            - heading "Atún en Lata (x3)" [level=3] [ref=e819]
+            - generic [ref=e820]:
+              - text: $210
+              - generic [ref=e821]: /un
+            - generic [ref=e822]:
+              - generic [ref=e823]:
+                - button "-" [ref=e824] [cursor=pointer]
+                - generic [ref=e825]: "1"
+                - button "+" [ref=e826] [cursor=pointer]
+              - button "+ Agregar" [ref=e827] [cursor=pointer]
+        - generic [ref=e828]:
+          - img "Sardinas en Aceite" [ref=e830]
+          - generic [ref=e831]:
+            - heading "Sardinas en Aceite" [level=3] [ref=e832]
+            - generic [ref=e833]:
+              - text: $95
+              - generic [ref=e834]: /un
+            - generic [ref=e835]:
+              - generic [ref=e836]:
+                - button "-" [ref=e837] [cursor=pointer]
+                - generic [ref=e838]: "1"
+                - button "+" [ref=e839] [cursor=pointer]
+              - button "+ Agregar" [ref=e840] [cursor=pointer]
+        - generic [ref=e841]:
+          - generic [ref=e842]: Oferta
+          - img "Papa (bolsa 5kg)" [ref=e844]
+          - generic [ref=e845]:
+            - heading "Papa (bolsa 5kg)" [level=3] [ref=e846]
+            - generic [ref=e847]:
+              - text: $210
+              - generic [ref=e848]: /un
+            - generic [ref=e849]:
+              - generic [ref=e850]:
+                - button "-" [ref=e851] [cursor=pointer]
+                - generic [ref=e852]: "1"
+                - button "+" [ref=e853] [cursor=pointer]
+              - button "+ Agregar" [ref=e854] [cursor=pointer]
+        - generic [ref=e855]:
+          - img "Cebolla (bolsa 2kg)" [ref=e857]
+          - generic [ref=e858]:
+            - heading "Cebolla (bolsa 2kg)" [level=3] [ref=e859]
+            - generic [ref=e860]:
+              - text: $115
+              - generic [ref=e861]: /un
+            - generic [ref=e862]:
+              - generic [ref=e863]:
+                - button "-" [ref=e864] [cursor=pointer]
+                - generic [ref=e865]: "1"
+                - button "+" [ref=e866] [cursor=pointer]
+              - button "+ Agregar" [ref=e867] [cursor=pointer]
+        - generic [ref=e868]:
+          - img "Ajo (cabeza)" [ref=e870]
+          - generic [ref=e871]:
+            - heading "Ajo (cabeza)" [level=3] [ref=e872]
+            - generic [ref=e873]:
+              - text: $45
+              - generic [ref=e874]: /un
+            - generic [ref=e875]:
+              - generic [ref=e876]:
+                - button "-" [ref=e877] [cursor=pointer]
+                - generic [ref=e878]: "1"
+                - button "+" [ref=e879] [cursor=pointer]
+              - button "+ Agregar" [ref=e880] [cursor=pointer]
+        - generic [ref=e881]:
+          - img "Zanahoria (kg)" [ref=e883]
+          - generic [ref=e884]:
+            - heading "Zanahoria (kg)" [level=3] [ref=e885]
+            - generic [ref=e886]:
+              - text: $80
+              - generic [ref=e887]: /kg
+            - generic [ref=e888]:
+              - generic [ref=e889]:
+                - button "-" [ref=e890] [cursor=pointer]
+                - generic [ref=e891]: "1"
+                - button "+" [ref=e892] [cursor=pointer]
+              - button "+ Agregar" [ref=e893] [cursor=pointer]
+        - generic [ref=e894]:
+          - img "Tomate (kg)" [ref=e896]
+          - generic [ref=e897]:
+            - heading "Tomate (kg)" [level=3] [ref=e898]
+            - generic [ref=e899]:
+              - text: $120
+              - generic [ref=e900]: /kg
+            - generic [ref=e901]:
+              - generic [ref=e902]:
+                - button "-" [ref=e903] [cursor=pointer]
+                - generic [ref=e904]: "1"
+                - button "+" [ref=e905] [cursor=pointer]
+              - button "+ Agregar" [ref=e906] [cursor=pointer]
+        - generic [ref=e907]:
+          - img "Limón (bolsa)" [ref=e909]
+          - generic [ref=e910]:
+            - heading "Limón (bolsa)" [level=3] [ref=e911]
+            - generic [ref=e912]:
+              - text: $90
+              - generic [ref=e913]: /un
+            - generic [ref=e914]:
+              - generic [ref=e915]:
+                - button "-" [ref=e916] [cursor=pointer]
+                - generic [ref=e917]: "1"
+                - button "+" [ref=e918] [cursor=pointer]
+              - button "+ Agregar" [ref=e919] [cursor=pointer]
+        - generic [ref=e920]:
+          - img "Lechuga (un)" [ref=e922]
+          - generic [ref=e923]:
+            - heading "Lechuga (un)" [level=3] [ref=e924]
+            - generic [ref=e925]:
+              - text: $65
+              - generic [ref=e926]: /un
+            - generic [ref=e927]:
+              - generic [ref=e928]:
+                - button "-" [ref=e929] [cursor=pointer]
+                - generic [ref=e930]: "1"
+                - button "+" [ref=e931] [cursor=pointer]
+              - button "+ Agregar" [ref=e932] [cursor=pointer]
+        - generic [ref=e933]:
+          - img "Pimiento Rojo" [ref=e935]
+          - generic [ref=e936]:
+            - heading "Pimiento Rojo" [level=3] [ref=e937]
+            - generic [ref=e938]:
+              - text: $95
+              - generic [ref=e939]: /kg
+            - generic [ref=e940]:
+              - generic [ref=e941]:
+                - button "-" [ref=e942] [cursor=pointer]
+                - generic [ref=e943]: "1"
+                - button "+" [ref=e944] [cursor=pointer]
+              - button "+ Agregar" [ref=e945] [cursor=pointer]
+        - generic [ref=e946]:
+          - img "Manzana (kg)" [ref=e948]
+          - generic [ref=e949]:
+            - heading "Manzana (kg)" [level=3] [ref=e950]
+            - generic [ref=e951]:
+              - text: $130
+              - generic [ref=e952]: /kg
+            - generic [ref=e953]:
+              - generic [ref=e954]:
+                - button "-" [ref=e955] [cursor=pointer]
+                - generic [ref=e956]: "1"
+                - button "+" [ref=e957] [cursor=pointer]
+              - button "+ Agregar" [ref=e958] [cursor=pointer]
+        - generic [ref=e959]:
+          - img "Naranja (kg)" [ref=e961]
+          - generic [ref=e962]:
+            - heading "Naranja (kg)" [level=3] [ref=e963]
+            - generic [ref=e964]:
+              - text: $90
+              - generic [ref=e965]: /kg
+            - generic [ref=e966]:
+              - generic [ref=e967]:
+                - button "-" [ref=e968] [cursor=pointer]
+                - generic [ref=e969]: "1"
+                - button "+" [ref=e970] [cursor=pointer]
+              - button "+ Agregar" [ref=e971] [cursor=pointer]
+        - generic [ref=e972]:
+          - img "Banana (kg)" [ref=e974]
+          - generic [ref=e975]:
+            - heading "Banana (kg)" [level=3] [ref=e976]
+            - generic [ref=e977]:
+              - text: $75
+              - generic [ref=e978]: /kg
+            - generic [ref=e979]:
+              - generic [ref=e980]:
+                - button "-" [ref=e981] [cursor=pointer]
+                - generic [ref=e982]: "1"
+                - button "+" [ref=e983] [cursor=pointer]
+              - button "+ Agregar" [ref=e984] [cursor=pointer]
+        - generic [ref=e985]:
+          - img "Leche Entera (1L)" [ref=e987]
+          - generic [ref=e988]:
+            - heading "Leche Entera (1L)" [level=3] [ref=e989]
+            - generic [ref=e990]:
+              - text: $65
+              - generic [ref=e991]: /un
+            - generic [ref=e992]:
+              - generic [ref=e993]:
+                - button "-" [ref=e994] [cursor=pointer]
+                - generic [ref=e995]: "1"
+                - button "+" [ref=e996] [cursor=pointer]
+              - button "+ Agregar" [ref=e997] [cursor=pointer]
+        - generic [ref=e998]:
+          - img "Leche Descremada (1L)" [ref=e1000]
+          - generic [ref=e1001]:
+            - heading "Leche Descremada (1L)" [level=3] [ref=e1002]
+            - generic [ref=e1003]:
+              - text: $68
+              - generic [ref=e1004]: /un
+            - generic [ref=e1005]:
+              - generic [ref=e1006]:
+                - button "-" [ref=e1007] [cursor=pointer]
+                - generic [ref=e1008]: "1"
+                - button "+" [ref=e1009] [cursor=pointer]
+              - button "+ Agregar" [ref=e1010] [cursor=pointer]
+        - generic [ref=e1011]:
+          - img "Yogur Natural (200g)" [ref=e1013]
+          - generic [ref=e1014]:
+            - heading "Yogur Natural (200g)" [level=3] [ref=e1015]
+            - generic [ref=e1016]:
+              - text: $70
+              - generic [ref=e1017]: /un
+            - generic [ref=e1018]:
+              - generic [ref=e1019]:
+                - button "-" [ref=e1020] [cursor=pointer]
+                - generic [ref=e1021]: "1"
+                - button "+" [ref=e1022] [cursor=pointer]
+              - button "+ Agregar" [ref=e1023] [cursor=pointer]
+        - generic [ref=e1024]:
+          - img "Manteca (200g)" [ref=e1026]
+          - generic [ref=e1027]:
+            - heading "Manteca (200g)" [level=3] [ref=e1028]
+            - generic [ref=e1029]:
+              - text: $145
+              - generic [ref=e1030]: /un
+            - generic [ref=e1031]:
+              - generic [ref=e1032]:
+                - button "-" [ref=e1033] [cursor=pointer]
+                - generic [ref=e1034]: "1"
+                - button "+" [ref=e1035] [cursor=pointer]
+              - button "+ Agregar" [ref=e1036] [cursor=pointer]
+        - generic [ref=e1037]:
+          - img "Crema de Leche (200ml)" [ref=e1039]
+          - generic [ref=e1040]:
+            - heading "Crema de Leche (200ml)" [level=3] [ref=e1041]
+            - generic [ref=e1042]:
+              - text: $120
+              - generic [ref=e1043]: /un
+            - generic [ref=e1044]:
+              - generic [ref=e1045]:
+                - button "-" [ref=e1046] [cursor=pointer]
+                - generic [ref=e1047]: "1"
+                - button "+" [ref=e1048] [cursor=pointer]
+              - button "+ Agregar" [ref=e1049] [cursor=pointer]
+        - generic [ref=e1050]:
+          - img "Huevos Blancos (doc.)" [ref=e1052]
+          - generic [ref=e1053]:
+            - heading "Huevos Blancos (doc.)" [level=3] [ref=e1054]
+            - generic [ref=e1055]:
+              - text: $185
+              - generic [ref=e1056]: /un
+            - generic [ref=e1057]:
+              - generic [ref=e1058]:
+                - button "-" [ref=e1059] [cursor=pointer]
+                - generic [ref=e1060]: "1"
+                - button "+" [ref=e1061] [cursor=pointer]
+              - button "+ Agregar" [ref=e1062] [cursor=pointer]
+        - generic [ref=e1063]:
+          - img "Huevos Marrones (doc.)" [ref=e1065]
+          - generic [ref=e1066]:
+            - heading "Huevos Marrones (doc.)" [level=3] [ref=e1067]
+            - generic [ref=e1068]:
+              - text: $195
+              - generic [ref=e1069]: /un
+            - generic [ref=e1070]:
+              - generic [ref=e1071]:
+                - button "-" [ref=e1072] [cursor=pointer]
+                - generic [ref=e1073]: "1"
+                - button "+" [ref=e1074] [cursor=pointer]
+              - button "+ Agregar" [ref=e1075] [cursor=pointer]
+        - generic [ref=e1076]:
+          - img "Agua Mineral (1.5L)" [ref=e1078]
+          - generic [ref=e1079]:
+            - heading "Agua Mineral (1.5L)" [level=3] [ref=e1080]
+            - generic [ref=e1081]:
+              - text: $80
+              - generic [ref=e1082]: /un
+            - generic [ref=e1083]:
+              - generic [ref=e1084]:
+                - button "-" [ref=e1085] [cursor=pointer]
+                - generic [ref=e1086]: "1"
+                - button "+" [ref=e1087] [cursor=pointer]
+              - button "+ Agregar" [ref=e1088] [cursor=pointer]
+        - generic [ref=e1089]:
+          - img "Agua c/Gas (1.5L)" [ref=e1091]
+          - generic [ref=e1092]:
+            - heading "Agua c/Gas (1.5L)" [level=3] [ref=e1093]
+            - generic [ref=e1094]:
+              - text: $85
+              - generic [ref=e1095]: /un
+            - generic [ref=e1096]:
+              - generic [ref=e1097]:
+                - button "-" [ref=e1098] [cursor=pointer]
+                - generic [ref=e1099]: "1"
+                - button "+" [ref=e1100] [cursor=pointer]
+              - button "+ Agregar" [ref=e1101] [cursor=pointer]
+        - generic [ref=e1102]:
+          - generic [ref=e1103]: Oferta
+          - img "Coca-Cola (2.25L)" [ref=e1105]
+          - generic [ref=e1106]:
+            - heading "Coca-Cola (2.25L)" [level=3] [ref=e1107]
+            - generic [ref=e1108]:
+              - text: $195
+              - generic [ref=e1109]: /un
+            - generic [ref=e1110]:
+              - generic [ref=e1111]:
+                - button "-" [ref=e1112] [cursor=pointer]
+                - generic [ref=e1113]: "1"
+                - button "+" [ref=e1114] [cursor=pointer]
+              - button "+ Agregar" [ref=e1115] [cursor=pointer]
+        - generic [ref=e1116]:
+          - img "Coca-Cola (500ml)" [ref=e1118]
+          - generic [ref=e1119]:
+            - heading "Coca-Cola (500ml)" [level=3] [ref=e1120]
+            - generic [ref=e1121]:
+              - text: $95
+              - generic [ref=e1122]: /un
+            - generic [ref=e1123]:
+              - generic [ref=e1124]:
+                - button "-" [ref=e1125] [cursor=pointer]
+                - generic [ref=e1126]: "1"
+                - button "+" [ref=e1127] [cursor=pointer]
+              - button "+ Agregar" [ref=e1128] [cursor=pointer]
+        - generic [ref=e1129]:
+          - img "Pepsi (2L)" [ref=e1131]
+          - generic [ref=e1132]:
+            - heading "Pepsi (2L)" [level=3] [ref=e1133]
+            - generic [ref=e1134]:
+              - text: $175
+              - generic [ref=e1135]: /un
+            - generic [ref=e1136]:
+              - generic [ref=e1137]:
+                - button "-" [ref=e1138] [cursor=pointer]
+                - generic [ref=e1139]: "1"
+                - button "+" [ref=e1140] [cursor=pointer]
+              - button "+ Agregar" [ref=e1141] [cursor=pointer]
+        - generic [ref=e1142]:
+          - img "Sprite (2L)" [ref=e1144]
+          - generic [ref=e1145]:
+            - heading "Sprite (2L)" [level=3] [ref=e1146]
+            - generic [ref=e1147]:
+              - text: $175
+              - generic [ref=e1148]: /un
+            - generic [ref=e1149]:
+              - generic [ref=e1150]:
+                - button "-" [ref=e1151] [cursor=pointer]
+                - generic [ref=e1152]: "1"
+                - button "+" [ref=e1153] [cursor=pointer]
+              - button "+ Agregar" [ref=e1154] [cursor=pointer]
+        - generic [ref=e1155]:
+          - img "Fanta Naranja (2L)" [ref=e1157]
+          - generic [ref=e1158]:
+            - heading "Fanta Naranja (2L)" [level=3] [ref=e1159]
+            - generic [ref=e1160]:
+              - text: $175
+              - generic [ref=e1161]: /un
+            - generic [ref=e1162]:
+              - generic [ref=e1163]:
+                - button "-" [ref=e1164] [cursor=pointer]
+                - generic [ref=e1165]: "1"
+                - button "+" [ref=e1166] [cursor=pointer]
+              - button "+ Agregar" [ref=e1167] [cursor=pointer]
+        - generic [ref=e1168]:
+          - img "Jugo Tang (sobre)" [ref=e1170]
+          - generic [ref=e1171]:
+            - heading "Jugo Tang (sobre)" [level=3] [ref=e1172]
+            - generic [ref=e1173]:
+              - text: $45
+              - generic [ref=e1174]: /un
+            - generic [ref=e1175]:
+              - generic [ref=e1176]:
+                - button "-" [ref=e1177] [cursor=pointer]
+                - generic [ref=e1178]: "1"
+                - button "+" [ref=e1179] [cursor=pointer]
+              - button "+ Agregar" [ref=e1180] [cursor=pointer]
+        - generic [ref=e1181]:
+          - img "Cerveza Patricia (1L)" [ref=e1183]
+          - generic [ref=e1184]:
+            - heading "Cerveza Patricia (1L)" [level=3] [ref=e1185]
+            - generic [ref=e1186]:
+              - text: $145
+              - generic [ref=e1187]: /un
+            - generic [ref=e1188]:
+              - generic [ref=e1189]:
+                - button "-" [ref=e1190] [cursor=pointer]
+                - generic [ref=e1191]: "1"
+                - button "+" [ref=e1192] [cursor=pointer]
+              - button "+ Agregar" [ref=e1193] [cursor=pointer]
+        - generic [ref=e1194]:
+          - img "Cerveza Pilsen (lata)" [ref=e1196]
+          - generic [ref=e1197]:
+            - heading "Cerveza Pilsen (lata)" [level=3] [ref=e1198]
+            - generic [ref=e1199]:
+              - text: $95
+              - generic [ref=e1200]: /un
+            - generic [ref=e1201]:
+              - generic [ref=e1202]:
+                - button "-" [ref=e1203] [cursor=pointer]
+                - generic [ref=e1204]: "1"
+                - button "+" [ref=e1205] [cursor=pointer]
+              - button "+ Agregar" [ref=e1206] [cursor=pointer]
+        - generic [ref=e1207]:
+          - img "Cerveza Amstel (6-pack)" [ref=e1209]
+          - generic [ref=e1210]:
+            - heading "Cerveza Amstel (6-pack)" [level=3] [ref=e1211]
+            - generic [ref=e1212]:
+              - text: $590
+              - generic [ref=e1213]: /un
+            - generic [ref=e1214]:
+              - generic [ref=e1215]:
+                - button "-" [ref=e1216] [cursor=pointer]
+                - generic [ref=e1217]: "1"
+                - button "+" [ref=e1218] [cursor=pointer]
+              - button "+ Agregar" [ref=e1219] [cursor=pointer]
+        - generic [ref=e1220]:
+          - img "Vino Tinto (750ml)" [ref=e1222]
+          - generic [ref=e1223]:
+            - heading "Vino Tinto (750ml)" [level=3] [ref=e1224]
+            - generic [ref=e1225]:
+              - text: $420
+              - generic [ref=e1226]: /un
+            - generic [ref=e1227]:
+              - generic [ref=e1228]:
+                - button "-" [ref=e1229] [cursor=pointer]
+                - generic [ref=e1230]: "1"
+                - button "+" [ref=e1231] [cursor=pointer]
+              - button "+ Agregar" [ref=e1232] [cursor=pointer]
+        - generic [ref=e1233]:
+          - img "Vino Blanco (750ml)" [ref=e1235]
+          - generic [ref=e1236]:
+            - heading "Vino Blanco (750ml)" [level=3] [ref=e1237]
+            - generic [ref=e1238]:
+              - text: $390
+              - generic [ref=e1239]: /un
+            - generic [ref=e1240]:
+              - generic [ref=e1241]:
+                - button "-" [ref=e1242] [cursor=pointer]
+                - generic [ref=e1243]: "1"
+                - button "+" [ref=e1244] [cursor=pointer]
+              - button "+ Agregar" [ref=e1245] [cursor=pointer]
+        - generic [ref=e1246]:
+          - img "Sidra Don Valentin (750)" [ref=e1248]
+          - generic [ref=e1249]:
+            - heading "Sidra Don Valentin (750)" [level=3] [ref=e1250]
+            - generic [ref=e1251]:
+              - text: $330
+              - generic [ref=e1252]: /un
+            - generic [ref=e1253]:
+              - generic [ref=e1254]:
+                - button "-" [ref=e1255] [cursor=pointer]
+                - generic [ref=e1256]: "1"
+                - button "+" [ref=e1257] [cursor=pointer]
+              - button "+ Agregar" [ref=e1258] [cursor=pointer]
+        - generic [ref=e1259]:
+          - img "Whisky Etiqueta Roja" [ref=e1261]
+          - generic [ref=e1262]:
+            - heading "Whisky Etiqueta Roja" [level=3] [ref=e1263]
+            - generic [ref=e1264]:
+              - text: $1290
+              - generic [ref=e1265]: /un
+            - generic [ref=e1266]:
+              - generic [ref=e1267]:
+                - button "-" [ref=e1268] [cursor=pointer]
+                - generic [ref=e1269]: "1"
+                - button "+" [ref=e1270] [cursor=pointer]
+              - button "+ Agregar" [ref=e1271] [cursor=pointer]
+        - generic [ref=e1272]:
+          - img "Ron Bacardí (750ml)" [ref=e1274]
+          - generic [ref=e1275]:
+            - heading "Ron Bacardí (750ml)" [level=3] [ref=e1276]
+            - generic [ref=e1277]:
+              - text: $980
+              - generic [ref=e1278]: /un
+            - generic [ref=e1279]:
+              - generic [ref=e1280]:
+                - button "-" [ref=e1281] [cursor=pointer]
+                - generic [ref=e1282]: "1"
+                - button "+" [ref=e1283] [cursor=pointer]
+              - button "+ Agregar" [ref=e1284] [cursor=pointer]
+        - generic [ref=e1285]:
+          - img "Té (caja 25 saquitos)" [ref=e1287]
+          - generic [ref=e1288]:
+            - heading "Té (caja 25 saquitos)" [level=3] [ref=e1289]
+            - generic [ref=e1290]:
+              - text: $145
+              - generic [ref=e1291]: /un
+            - generic [ref=e1292]:
+              - generic [ref=e1293]:
+                - button "-" [ref=e1294] [cursor=pointer]
+                - generic [ref=e1295]: "1"
+                - button "+" [ref=e1296] [cursor=pointer]
+              - button "+ Agregar" [ref=e1297] [cursor=pointer]
+        - generic [ref=e1298]:
+          - img "Yerba Mate (1kg)" [ref=e1300]
+          - generic [ref=e1301]:
+            - heading "Yerba Mate (1kg)" [level=3] [ref=e1302]
+            - generic [ref=e1303]:
+              - text: $380
+              - generic [ref=e1304]: /un
+            - generic [ref=e1305]:
+              - generic [ref=e1306]:
+                - button "-" [ref=e1307] [cursor=pointer]
+                - generic [ref=e1308]: "1"
+                - button "+" [ref=e1309] [cursor=pointer]
+              - button "+ Agregar" [ref=e1310] [cursor=pointer]
+        - generic [ref=e1311]:
+          - img "Café Molido (250g)" [ref=e1313]
+          - generic [ref=e1314]:
+            - heading "Café Molido (250g)" [level=3] [ref=e1315]
+            - generic [ref=e1316]:
+              - text: $290
+              - generic [ref=e1317]: /un
+            - generic [ref=e1318]:
+              - generic [ref=e1319]:
+                - button "-" [ref=e1320] [cursor=pointer]
+                - generic [ref=e1321]: "1"
+                - button "+" [ref=e1322] [cursor=pointer]
+              - button "+ Agregar" [ref=e1323] [cursor=pointer]
+        - generic [ref=e1324]:
+          - img "Arroz (1kg)" [ref=e1326]
+          - generic [ref=e1327]:
+            - heading "Arroz (1kg)" [level=3] [ref=e1328]
+            - generic [ref=e1329]:
+              - text: $115
+              - generic [ref=e1330]: /un
+            - generic [ref=e1331]:
+              - generic [ref=e1332]:
+                - button "-" [ref=e1333] [cursor=pointer]
+                - generic [ref=e1334]: "1"
+                - button "+" [ref=e1335] [cursor=pointer]
+              - button "+ Agregar" [ref=e1336] [cursor=pointer]
+        - generic [ref=e1337]:
+          - img "Arroz Integral (1kg)" [ref=e1339]
+          - generic [ref=e1340]:
+            - heading "Arroz Integral (1kg)" [level=3] [ref=e1341]
+            - generic [ref=e1342]:
+              - text: $135
+              - generic [ref=e1343]: /un
+            - generic [ref=e1344]:
+              - generic [ref=e1345]:
+                - button "-" [ref=e1346] [cursor=pointer]
+                - generic [ref=e1347]: "1"
+                - button "+" [ref=e1348] [cursor=pointer]
+              - button "+ Agregar" [ref=e1349] [cursor=pointer]
+        - generic [ref=e1350]:
+          - img "Fideos Espagueti (500g)" [ref=e1352]
+          - generic [ref=e1353]:
+            - heading "Fideos Espagueti (500g)" [level=3] [ref=e1354]
+            - generic [ref=e1355]:
+              - text: $85
+              - generic [ref=e1356]: /un
+            - generic [ref=e1357]:
+              - generic [ref=e1358]:
+                - button "-" [ref=e1359] [cursor=pointer]
+                - generic [ref=e1360]: "1"
+                - button "+" [ref=e1361] [cursor=pointer]
+              - button "+ Agregar" [ref=e1362] [cursor=pointer]
+        - generic [ref=e1363]:
+          - img "Fideos Corbata (500g)" [ref=e1365]
+          - generic [ref=e1366]:
+            - heading "Fideos Corbata (500g)" [level=3] [ref=e1367]
+            - generic [ref=e1368]:
+              - text: $85
+              - generic [ref=e1369]: /un
+            - generic [ref=e1370]:
+              - generic [ref=e1371]:
+                - button "-" [ref=e1372] [cursor=pointer]
+                - generic [ref=e1373]: "1"
+                - button "+" [ref=e1374] [cursor=pointer]
+              - button "+ Agregar" [ref=e1375] [cursor=pointer]
+        - generic [ref=e1376]:
+          - img "Harina 0000 (1kg)" [ref=e1378]
+          - generic [ref=e1379]:
+            - heading "Harina 0000 (1kg)" [level=3] [ref=e1380]
+            - generic [ref=e1381]:
+              - text: $95
+              - generic [ref=e1382]: /un
+            - generic [ref=e1383]:
+              - generic [ref=e1384]:
+                - button "-" [ref=e1385] [cursor=pointer]
+                - generic [ref=e1386]: "1"
+                - button "+" [ref=e1387] [cursor=pointer]
+              - button "+ Agregar" [ref=e1388] [cursor=pointer]
+        - generic [ref=e1389]:
+          - img "Azúcar (1kg)" [ref=e1391]
+          - generic [ref=e1392]:
+            - heading "Azúcar (1kg)" [level=3] [ref=e1393]
+            - generic [ref=e1394]:
+              - text: $110
+              - generic [ref=e1395]: /un
+            - generic [ref=e1396]:
+              - generic [ref=e1397]:
+                - button "-" [ref=e1398] [cursor=pointer]
+                - generic [ref=e1399]: "1"
+                - button "+" [ref=e1400] [cursor=pointer]
+              - button "+ Agregar" [ref=e1401] [cursor=pointer]
+        - generic [ref=e1402]:
+          - img "Sal Fina (500g)" [ref=e1404]
+          - generic [ref=e1405]:
+            - heading "Sal Fina (500g)" [level=3] [ref=e1406]
+            - generic [ref=e1407]:
+              - text: $55
+              - generic [ref=e1408]: /un
+            - generic [ref=e1409]:
+              - generic [ref=e1410]:
+                - button "-" [ref=e1411] [cursor=pointer]
+                - generic [ref=e1412]: "1"
+                - button "+" [ref=e1413] [cursor=pointer]
+              - button "+ Agregar" [ref=e1414] [cursor=pointer]
+        - generic [ref=e1415]:
+          - img "Aceite de Girasol (1L)" [ref=e1417]
+          - generic [ref=e1418]:
+            - heading "Aceite de Girasol (1L)" [level=3] [ref=e1419]
+            - generic [ref=e1420]:
+              - text: $175
+              - generic [ref=e1421]: /un
+            - generic [ref=e1422]:
+              - generic [ref=e1423]:
+                - button "-" [ref=e1424] [cursor=pointer]
+                - generic [ref=e1425]: "1"
+                - button "+" [ref=e1426] [cursor=pointer]
+              - button "+ Agregar" [ref=e1427] [cursor=pointer]
+        - generic [ref=e1428]:
+          - img "Aceite de Oliva (500ml)" [ref=e1430]
+          - generic [ref=e1431]:
+            - heading "Aceite de Oliva (500ml)" [level=3] [ref=e1432]
+            - generic [ref=e1433]:
+              - text: $490
+              - generic [ref=e1434]: /un
+            - generic [ref=e1435]:
+              - generic [ref=e1436]:
+                - button "-" [ref=e1437] [cursor=pointer]
+                - generic [ref=e1438]: "1"
+                - button "+" [ref=e1439] [cursor=pointer]
+              - button "+ Agregar" [ref=e1440] [cursor=pointer]
+        - generic [ref=e1441]:
+          - img "Vinagre de Manzana" [ref=e1443]
+          - generic [ref=e1444]:
+            - heading "Vinagre de Manzana" [level=3] [ref=e1445]
+            - generic [ref=e1446]:
+              - text: $130
+              - generic [ref=e1447]: /un
+            - generic [ref=e1448]:
+              - generic [ref=e1449]:
+                - button "-" [ref=e1450] [cursor=pointer]
+                - generic [ref=e1451]: "1"
+                - button "+" [ref=e1452] [cursor=pointer]
+              - button "+ Agregar" [ref=e1453] [cursor=pointer]
+        - generic [ref=e1454]:
+          - img "Salsa de Tomate (400g)" [ref=e1456]
+          - generic [ref=e1457]:
+            - heading "Salsa de Tomate (400g)" [level=3] [ref=e1458]
+            - generic [ref=e1459]:
+              - text: $110
+              - generic [ref=e1460]: /un
+            - generic [ref=e1461]:
+              - generic [ref=e1462]:
+                - button "-" [ref=e1463] [cursor=pointer]
+                - generic [ref=e1464]: "1"
+                - button "+" [ref=e1465] [cursor=pointer]
+              - button "+ Agregar" [ref=e1466] [cursor=pointer]
+        - generic [ref=e1467]:
+          - img "Pasta de Tomate (200g)" [ref=e1469]
+          - generic [ref=e1470]:
+            - heading "Pasta de Tomate (200g)" [level=3] [ref=e1471]
+            - generic [ref=e1472]:
+              - text: $80
+              - generic [ref=e1473]: /un
+            - generic [ref=e1474]:
+              - generic [ref=e1475]:
+                - button "-" [ref=e1476] [cursor=pointer]
+                - generic [ref=e1477]: "1"
+                - button "+" [ref=e1478] [cursor=pointer]
+              - button "+ Agregar" [ref=e1479] [cursor=pointer]
+        - generic [ref=e1480]:
+          - img "Mayonesa (500g)" [ref=e1482]
+          - generic [ref=e1483]:
+            - heading "Mayonesa (500g)" [level=3] [ref=e1484]
+            - generic [ref=e1485]:
+              - text: $210
+              - generic [ref=e1486]: /un
+            - generic [ref=e1487]:
+              - generic [ref=e1488]:
+                - button "-" [ref=e1489] [cursor=pointer]
+                - generic [ref=e1490]: "1"
+                - button "+" [ref=e1491] [cursor=pointer]
+              - button "+ Agregar" [ref=e1492] [cursor=pointer]
+        - generic [ref=e1493]:
+          - img "Ketchup (500g)" [ref=e1495]
+          - generic [ref=e1496]:
+            - heading "Ketchup (500g)" [level=3] [ref=e1497]
+            - generic [ref=e1498]:
+              - text: $195
+              - generic [ref=e1499]: /un
+            - generic [ref=e1500]:
+              - generic [ref=e1501]:
+                - button "-" [ref=e1502] [cursor=pointer]
+                - generic [ref=e1503]: "1"
+                - button "+" [ref=e1504] [cursor=pointer]
+              - button "+ Agregar" [ref=e1505] [cursor=pointer]
+        - generic [ref=e1506]:
+          - img "Mostaza (200g)" [ref=e1508]
+          - generic [ref=e1509]:
+            - heading "Mostaza (200g)" [level=3] [ref=e1510]
+            - generic [ref=e1511]:
+              - text: $150
+              - generic [ref=e1512]: /un
+            - generic [ref=e1513]:
+              - generic [ref=e1514]:
+                - button "-" [ref=e1515] [cursor=pointer]
+                - generic [ref=e1516]: "1"
+                - button "+" [ref=e1517] [cursor=pointer]
+              - button "+ Agregar" [ref=e1518] [cursor=pointer]
+        - generic [ref=e1519]:
+          - img "Chimichurri (200ml)" [ref=e1521]
+          - generic [ref=e1522]:
+            - heading "Chimichurri (200ml)" [level=3] [ref=e1523]
+            - generic [ref=e1524]:
+              - text: $185
+              - generic [ref=e1525]: /un
+            - generic [ref=e1526]:
+              - generic [ref=e1527]:
+                - button "-" [ref=e1528] [cursor=pointer]
+                - generic [ref=e1529]: "1"
+                - button "+" [ref=e1530] [cursor=pointer]
+              - button "+ Agregar" [ref=e1531] [cursor=pointer]
+        - generic [ref=e1532]:
+          - img "Salsa Criolla (lata)" [ref=e1534]
+          - generic [ref=e1535]:
+            - heading "Salsa Criolla (lata)" [level=3] [ref=e1536]
+            - generic [ref=e1537]:
+              - text: $120
+              - generic [ref=e1538]: /un
+            - generic [ref=e1539]:
+              - generic [ref=e1540]:
+                - button "-" [ref=e1541] [cursor=pointer]
+                - generic [ref=e1542]: "1"
+                - button "+" [ref=e1543] [cursor=pointer]
+              - button "+ Agregar" [ref=e1544] [cursor=pointer]
+        - generic [ref=e1545]:
+          - img "Lentejas (500g)" [ref=e1547]
+          - generic [ref=e1548]:
+            - heading "Lentejas (500g)" [level=3] [ref=e1549]
+            - generic [ref=e1550]:
+              - text: $115
+              - generic [ref=e1551]: /un
+            - generic [ref=e1552]:
+              - generic [ref=e1553]:
+                - button "-" [ref=e1554] [cursor=pointer]
+                - generic [ref=e1555]: "1"
+                - button "+" [ref=e1556] [cursor=pointer]
+              - button "+ Agregar" [ref=e1557] [cursor=pointer]
+        - generic [ref=e1558]:
+          - img "Garbanzos (500g)" [ref=e1560]
+          - generic [ref=e1561]:
+            - heading "Garbanzos (500g)" [level=3] [ref=e1562]
+            - generic [ref=e1563]:
+              - text: $120
+              - generic [ref=e1564]: /un
+            - generic [ref=e1565]:
+              - generic [ref=e1566]:
+                - button "-" [ref=e1567] [cursor=pointer]
+                - generic [ref=e1568]: "1"
+                - button "+" [ref=e1569] [cursor=pointer]
+              - button "+ Agregar" [ref=e1570] [cursor=pointer]
+        - generic [ref=e1571]:
+          - img "Arvejas (400g lata)" [ref=e1573]
+          - generic [ref=e1574]:
+            - heading "Arvejas (400g lata)" [level=3] [ref=e1575]
+            - generic [ref=e1576]:
+              - text: $95
+              - generic [ref=e1577]: /un
+            - generic [ref=e1578]:
+              - generic [ref=e1579]:
+                - button "-" [ref=e1580] [cursor=pointer]
+                - generic [ref=e1581]: "1"
+                - button "+" [ref=e1582] [cursor=pointer]
+              - button "+ Agregar" [ref=e1583] [cursor=pointer]
+        - generic [ref=e1584]:
+          - img "Choclo (400g lata)" [ref=e1586]
+          - generic [ref=e1587]:
+            - heading "Choclo (400g lata)" [level=3] [ref=e1588]
+            - generic [ref=e1589]:
+              - text: $105
+              - generic [ref=e1590]: /un
+            - generic [ref=e1591]:
+              - generic [ref=e1592]:
+                - button "-" [ref=e1593] [cursor=pointer]
+                - generic [ref=e1594]: "1"
+                - button "+" [ref=e1595] [cursor=pointer]
+              - button "+ Agregar" [ref=e1596] [cursor=pointer]
+        - generic [ref=e1597]:
+          - img "Galletitas Saladas (200g)" [ref=e1599]
+          - generic [ref=e1600]:
+            - heading "Galletitas Saladas (200g)" [level=3] [ref=e1601]
+            - generic [ref=e1602]:
+              - text: $130
+              - generic [ref=e1603]: /un
+            - generic [ref=e1604]:
+              - generic [ref=e1605]:
+                - button "-" [ref=e1606] [cursor=pointer]
+                - generic [ref=e1607]: "1"
+                - button "+" [ref=e1608] [cursor=pointer]
+              - button "+ Agregar" [ref=e1609] [cursor=pointer]
+        - generic [ref=e1610]:
+          - img "Galletitas Dulces (200g)" [ref=e1612]
+          - generic [ref=e1613]:
+            - heading "Galletitas Dulces (200g)" [level=3] [ref=e1614]
+            - generic [ref=e1615]:
+              - text: $145
+              - generic [ref=e1616]: /un
+            - generic [ref=e1617]:
+              - generic [ref=e1618]:
+                - button "-" [ref=e1619] [cursor=pointer]
+                - generic [ref=e1620]: "1"
+                - button "+" [ref=e1621] [cursor=pointer]
+              - button "+ Agregar" [ref=e1622] [cursor=pointer]
+        - generic [ref=e1623]:
+          - img "Papas Fritas (150g)" [ref=e1625]
+          - generic [ref=e1626]:
+            - heading "Papas Fritas (150g)" [level=3] [ref=e1627]
+            - generic [ref=e1628]:
+              - text: $165
+              - generic [ref=e1629]: /un
+            - generic [ref=e1630]:
+              - generic [ref=e1631]:
+                - button "-" [ref=e1632] [cursor=pointer]
+                - generic [ref=e1633]: "1"
+                - button "+" [ref=e1634] [cursor=pointer]
+              - button "+ Agregar" [ref=e1635] [cursor=pointer]
+        - generic [ref=e1636]:
+          - img "Maizena (500g)" [ref=e1638]
+          - generic [ref=e1639]:
+            - heading "Maizena (500g)" [level=3] [ref=e1640]
+            - generic [ref=e1641]:
+              - text: $140
+              - generic [ref=e1642]: /un
+            - generic [ref=e1643]:
+              - generic [ref=e1644]:
+                - button "-" [ref=e1645] [cursor=pointer]
+                - generic [ref=e1646]: "1"
+                - button "+" [ref=e1647] [cursor=pointer]
+              - button "+ Agregar" [ref=e1648] [cursor=pointer]
+        - generic [ref=e1649]:
+          - img "Pan Rallado (500g)" [ref=e1651]
+          - generic [ref=e1652]:
+            - heading "Pan Rallado (500g)" [level=3] [ref=e1653]
+            - generic [ref=e1654]:
+              - text: $115
+              - generic [ref=e1655]: /un
+            - generic [ref=e1656]:
+              - generic [ref=e1657]:
+                - button "-" [ref=e1658] [cursor=pointer]
+                - generic [ref=e1659]: "1"
+                - button "+" [ref=e1660] [cursor=pointer]
+              - button "+ Agregar" [ref=e1661] [cursor=pointer]
+        - generic [ref=e1662]:
+          - img "Pan de Mesa (500g)" [ref=e1664]
+          - generic [ref=e1665]:
+            - heading "Pan de Mesa (500g)" [level=3] [ref=e1666]
+            - generic [ref=e1667]:
+              - text: $120
+              - generic [ref=e1668]: /un
+            - generic [ref=e1669]:
+              - generic [ref=e1670]:
+                - button "-" [ref=e1671] [cursor=pointer]
+                - generic [ref=e1672]: "1"
+                - button "+" [ref=e1673] [cursor=pointer]
+              - button "+ Agregar" [ref=e1674] [cursor=pointer]
+        - generic [ref=e1675]:
+          - img "Pan Lactal (720g)" [ref=e1677]
+          - generic [ref=e1678]:
+            - heading "Pan Lactal (720g)" [level=3] [ref=e1679]
+            - generic [ref=e1680]:
+              - text: $195
+              - generic [ref=e1681]: /un
+            - generic [ref=e1682]:
+              - generic [ref=e1683]:
+                - button "-" [ref=e1684] [cursor=pointer]
+                - generic [ref=e1685]: "1"
+                - button "+" [ref=e1686] [cursor=pointer]
+              - button "+ Agregar" [ref=e1687] [cursor=pointer]
+        - generic [ref=e1688]:
+          - img "Pan de Hamburguesa (x4)" [ref=e1690]
+          - generic [ref=e1691]:
+            - heading "Pan de Hamburguesa (x4)" [level=3] [ref=e1692]
+            - generic [ref=e1693]:
+              - text: $135
+              - generic [ref=e1694]: /un
+            - generic [ref=e1695]:
+              - generic [ref=e1696]:
+                - button "-" [ref=e1697] [cursor=pointer]
+                - generic [ref=e1698]: "1"
+                - button "+" [ref=e1699] [cursor=pointer]
+              - button "+ Agregar" [ref=e1700] [cursor=pointer]
+        - generic [ref=e1701]:
+          - img "Pan Árabe (x5)" [ref=e1703]
+          - generic [ref=e1704]:
+            - heading "Pan Árabe (x5)" [level=3] [ref=e1705]
+            - generic [ref=e1706]:
+              - text: $125
+              - generic [ref=e1707]: /un
+            - generic [ref=e1708]:
+              - generic [ref=e1709]:
+                - button "-" [ref=e1710] [cursor=pointer]
+                - generic [ref=e1711]: "1"
+                - button "+" [ref=e1712] [cursor=pointer]
+              - button "+ Agregar" [ref=e1713] [cursor=pointer]
+        - generic [ref=e1714]:
+          - img "Pan Francés (x6)" [ref=e1716]
+          - generic [ref=e1717]:
+            - heading "Pan Francés (x6)" [level=3] [ref=e1718]
+            - generic [ref=e1719]:
+              - text: $145
+              - generic [ref=e1720]: /un
+            - generic [ref=e1721]:
+              - generic [ref=e1722]:
+                - button "-" [ref=e1723] [cursor=pointer]
+                - generic [ref=e1724]: "1"
+                - button "+" [ref=e1725] [cursor=pointer]
+              - button "+ Agregar" [ref=e1726] [cursor=pointer]
+        - generic [ref=e1727]:
+          - generic [ref=e1728]: Casero
+          - img "Facturas (x6)" [ref=e1730]
+          - generic [ref=e1731]:
+            - heading "Facturas (x6)" [level=3] [ref=e1732]
+            - generic [ref=e1733]:
+              - text: $290
+              - generic [ref=e1734]: /un
+            - generic [ref=e1735]:
+              - generic [ref=e1736]:
+                - button "-" [ref=e1737] [cursor=pointer]
+                - generic [ref=e1738]: "1"
+                - button "+" [ref=e1739] [cursor=pointer]
+              - button "+ Agregar" [ref=e1740] [cursor=pointer]
+        - generic [ref=e1741]:
+          - img "Bizcochos (x6)" [ref=e1743]
+          - generic [ref=e1744]:
+            - heading "Bizcochos (x6)" [level=3] [ref=e1745]
+            - generic [ref=e1746]:
+              - text: $210
+              - generic [ref=e1747]: /un
+            - generic [ref=e1748]:
+              - generic [ref=e1749]:
+                - button "-" [ref=e1750] [cursor=pointer]
+                - generic [ref=e1751]: "1"
+                - button "+" [ref=e1752] [cursor=pointer]
+              - button "+ Agregar" [ref=e1753] [cursor=pointer]
+        - generic [ref=e1754]:
+          - img "Hamburguesas x4 (500g)" [ref=e1756]
+          - generic [ref=e1757]:
+            - heading "Hamburguesas x4 (500g)" [level=3] [ref=e1758]
+            - generic [ref=e1759]:
+              - text: $390
+              - generic [ref=e1760]: /un
+            - generic [ref=e1761]:
+              - generic [ref=e1762]:
+                - button "-" [ref=e1763] [cursor=pointer]
+                - generic [ref=e1764]: "1"
+                - button "+" [ref=e1765] [cursor=pointer]
+              - button "+ Agregar" [ref=e1766] [cursor=pointer]
+        - generic [ref=e1767]:
+          - img "Papas Pre-fritas (1kg)" [ref=e1769]
+          - generic [ref=e1770]:
+            - heading "Papas Pre-fritas (1kg)" [level=3] [ref=e1771]
+            - generic [ref=e1772]:
+              - text: $280
+              - generic [ref=e1773]: /un
+            - generic [ref=e1774]:
+              - generic [ref=e1775]:
+                - button "-" [ref=e1776] [cursor=pointer]
+                - generic [ref=e1777]: "1"
+                - button "+" [ref=e1778] [cursor=pointer]
+              - button "+ Agregar" [ref=e1779] [cursor=pointer]
+        - generic [ref=e1780]:
+          - img "Supremas Rebozadas (x4)" [ref=e1782]
+          - generic [ref=e1783]:
+            - heading "Supremas Rebozadas (x4)" [level=3] [ref=e1784]
+            - generic [ref=e1785]:
+              - text: $410
+              - generic [ref=e1786]: /un
+            - generic [ref=e1787]:
+              - generic [ref=e1788]:
+                - button "-" [ref=e1789] [cursor=pointer]
+                - generic [ref=e1790]: "1"
+                - button "+" [ref=e1791] [cursor=pointer]
+              - button "+ Agregar" [ref=e1792] [cursor=pointer]
+        - generic [ref=e1793]:
+          - img "Pizza Congelada (muzz.)" [ref=e1795]
+          - generic [ref=e1796]:
+            - heading "Pizza Congelada (muzz.)" [level=3] [ref=e1797]
+            - generic [ref=e1798]:
+              - text: $450
+              - generic [ref=e1799]: /un
+            - generic [ref=e1800]:
+              - generic [ref=e1801]:
+                - button "-" [ref=e1802] [cursor=pointer]
+                - generic [ref=e1803]: "1"
+                - button "+" [ref=e1804] [cursor=pointer]
+              - button "+ Agregar" [ref=e1805] [cursor=pointer]
+        - generic [ref=e1806]:
+          - img "Empanadas Carne (x12)" [ref=e1808]
+          - generic [ref=e1809]:
+            - heading "Empanadas Carne (x12)" [level=3] [ref=e1810]
+            - generic [ref=e1811]:
+              - text: $520
+              - generic [ref=e1812]: /un
+            - generic [ref=e1813]:
+              - generic [ref=e1814]:
+                - button "-" [ref=e1815] [cursor=pointer]
+                - generic [ref=e1816]: "1"
+                - button "+" [ref=e1817] [cursor=pointer]
+              - button "+ Agregar" [ref=e1818] [cursor=pointer]
+        - generic [ref=e1819]:
+          - img "Helado Familiar (1L)" [ref=e1821]
+          - generic [ref=e1822]:
+            - heading "Helado Familiar (1L)" [level=3] [ref=e1823]
+            - generic [ref=e1824]:
+              - text: $490
+              - generic [ref=e1825]: /un
+            - generic [ref=e1826]:
+              - generic [ref=e1827]:
+                - button "-" [ref=e1828] [cursor=pointer]
+                - generic [ref=e1829]: "1"
+                - button "+" [ref=e1830] [cursor=pointer]
+              - button "+ Agregar" [ref=e1831] [cursor=pointer]
+        - generic [ref=e1832]:
+          - img "Chorizos Congelados (kg)" [ref=e1834]
+          - generic [ref=e1835]:
+            - heading "Chorizos Congelados (kg)" [level=3] [ref=e1836]
+            - generic [ref=e1837]:
+              - text: $340
+              - generic [ref=e1838]: /kg
+            - generic [ref=e1839]:
+              - generic [ref=e1840]:
+                - button "-" [ref=e1841] [cursor=pointer]
+                - generic [ref=e1842]: "1"
+                - button "+" [ref=e1843] [cursor=pointer]
+              - button "+ Agregar" [ref=e1844] [cursor=pointer]
+        - generic [ref=e1845]:
+          - img "Detergente (500ml)" [ref=e1847]
+          - generic [ref=e1848]:
+            - heading "Detergente (500ml)" [level=3] [ref=e1849]
+            - generic [ref=e1850]:
+              - text: $135
+              - generic [ref=e1851]: /un
+            - generic [ref=e1852]:
+              - generic [ref=e1853]:
+                - button "-" [ref=e1854] [cursor=pointer]
+                - generic [ref=e1855]: "1"
+                - button "+" [ref=e1856] [cursor=pointer]
+              - button "+ Agregar" [ref=e1857] [cursor=pointer]
+        - generic [ref=e1858]:
+          - img "Lavandina (2L)" [ref=e1860]
+          - generic [ref=e1861]:
+            - heading "Lavandina (2L)" [level=3] [ref=e1862]
+            - generic [ref=e1863]:
+              - text: $165
+              - generic [ref=e1864]: /un
+            - generic [ref=e1865]:
+              - generic [ref=e1866]:
+                - button "-" [ref=e1867] [cursor=pointer]
+                - generic [ref=e1868]: "1"
+                - button "+" [ref=e1869] [cursor=pointer]
+              - button "+ Agregar" [ref=e1870] [cursor=pointer]
+        - generic [ref=e1871]:
+          - img "Limpiapisos (1L)" [ref=e1873]
+          - generic [ref=e1874]:
+            - heading "Limpiapisos (1L)" [level=3] [ref=e1875]
+            - generic [ref=e1876]:
+              - text: $195
+              - generic [ref=e1877]: /un
+            - generic [ref=e1878]:
+              - generic [ref=e1879]:
+                - button "-" [ref=e1880] [cursor=pointer]
+                - generic [ref=e1881]: "1"
+                - button "+" [ref=e1882] [cursor=pointer]
+              - button "+ Agregar" [ref=e1883] [cursor=pointer]
+        - generic [ref=e1884]:
+          - img "Desengrasante (500ml)" [ref=e1886]
+          - generic [ref=e1887]:
+            - heading "Desengrasante (500ml)" [level=3] [ref=e1888]
+            - generic [ref=e1889]:
+              - text: $185
+              - generic [ref=e1890]: /un
+            - generic [ref=e1891]:
+              - generic [ref=e1892]:
+                - button "-" [ref=e1893] [cursor=pointer]
+                - generic [ref=e1894]: "1"
+                - button "+" [ref=e1895] [cursor=pointer]
+              - button "+ Agregar" [ref=e1896] [cursor=pointer]
+        - generic [ref=e1897]:
+          - img "Jabón en Polvo (1kg)" [ref=e1899]
+          - generic [ref=e1900]:
+            - heading "Jabón en Polvo (1kg)" [level=3] [ref=e1901]
+            - generic [ref=e1902]:
+              - text: $290
+              - generic [ref=e1903]: /un
+            - generic [ref=e1904]:
+              - generic [ref=e1905]:
+                - button "-" [ref=e1906] [cursor=pointer]
+                - generic [ref=e1907]: "1"
+                - button "+" [ref=e1908] [cursor=pointer]
+              - button "+ Agregar" [ref=e1909] [cursor=pointer]
+        - generic [ref=e1910]:
+          - img "Suavizante (1L)" [ref=e1912]
+          - generic [ref=e1913]:
+            - heading "Suavizante (1L)" [level=3] [ref=e1914]
+            - generic [ref=e1915]:
+              - text: $250
+              - generic [ref=e1916]: /un
+            - generic [ref=e1917]:
+              - generic [ref=e1918]:
+                - button "-" [ref=e1919] [cursor=pointer]
+                - generic [ref=e1920]: "1"
+                - button "+" [ref=e1921] [cursor=pointer]
+              - button "+ Agregar" [ref=e1922] [cursor=pointer]
+        - generic [ref=e1923]:
+          - img "Bolsas Basura x10" [ref=e1925]
+          - generic [ref=e1926]:
+            - heading "Bolsas Basura x10" [level=3] [ref=e1927]
+            - generic [ref=e1928]:
+              - text: $120
+              - generic [ref=e1929]: /un
+            - generic [ref=e1930]:
+              - generic [ref=e1931]:
+                - button "-" [ref=e1932] [cursor=pointer]
+                - generic [ref=e1933]: "1"
+                - button "+" [ref=e1934] [cursor=pointer]
+              - button "+ Agregar" [ref=e1935] [cursor=pointer]
+        - generic [ref=e1936]:
+          - img "Papel Higiénico (x4)" [ref=e1938]
+          - generic [ref=e1939]:
+            - heading "Papel Higiénico (x4)" [level=3] [ref=e1940]
+            - generic [ref=e1941]:
+              - text: $220
+              - generic [ref=e1942]: /un
+            - generic [ref=e1943]:
+              - generic [ref=e1944]:
+                - button "-" [ref=e1945] [cursor=pointer]
+                - generic [ref=e1946]: "1"
+                - button "+" [ref=e1947] [cursor=pointer]
+              - button "+ Agregar" [ref=e1948] [cursor=pointer]
+        - generic [ref=e1949]:
+          - img "Esponja Dual x2" [ref=e1951]
+          - generic [ref=e1952]:
+            - heading "Esponja Dual x2" [level=3] [ref=e1953]
+            - generic [ref=e1954]:
+              - text: $95
+              - generic [ref=e1955]: /un
+            - generic [ref=e1956]:
+              - generic [ref=e1957]:
+                - button "-" [ref=e1958] [cursor=pointer]
+                - generic [ref=e1959]: "1"
+                - button "+" [ref=e1960] [cursor=pointer]
+              - button "+ Agregar" [ref=e1961] [cursor=pointer]
+        - generic [ref=e1962]:
+          - img "Trapos de Piso x2" [ref=e1964]
+          - generic [ref=e1965]:
+            - heading "Trapos de Piso x2" [level=3] [ref=e1966]
+            - generic [ref=e1967]:
+              - text: $145
+              - generic [ref=e1968]: /un
+            - generic [ref=e1969]:
+              - generic [ref=e1970]:
+                - button "-" [ref=e1971] [cursor=pointer]
+                - generic [ref=e1972]: "1"
+                - button "+" [ref=e1973] [cursor=pointer]
+              - button "+ Agregar" [ref=e1974] [cursor=pointer]
+        - generic [ref=e1975]:
+          - img "Limpiavidrios (500ml)" [ref=e1977]
+          - generic [ref=e1978]:
+            - heading "Limpiavidrios (500ml)" [level=3] [ref=e1979]
+            - generic [ref=e1980]:
+              - text: $170
+              - generic [ref=e1981]: /un
+            - generic [ref=e1982]:
+              - generic [ref=e1983]:
+                - button "-" [ref=e1984] [cursor=pointer]
+                - generic [ref=e1985]: "1"
+                - button "+" [ref=e1986] [cursor=pointer]
+              - button "+ Agregar" [ref=e1987] [cursor=pointer]
+        - generic [ref=e1988]:
+          - img "Bala de Gas (10kg)" [ref=e1990]
+          - generic [ref=e1991]:
+            - heading "Bala de Gas (10kg)" [level=3] [ref=e1992]
+            - generic [ref=e1993]:
+              - text: $1450
+              - generic [ref=e1994]: /un
+            - generic [ref=e1995]:
+              - generic [ref=e1996]:
+                - button "-" [ref=e1997] [cursor=pointer]
+                - generic [ref=e1998]: "1"
+                - button "+" [ref=e1999] [cursor=pointer]
+              - button "+ Agregar" [ref=e2000] [cursor=pointer]
+        - generic [ref=e2001]:
+          - img "Shampoo (400ml)" [ref=e2003]
+          - generic [ref=e2004]:
+            - heading "Shampoo (400ml)" [level=3] [ref=e2005]
+            - generic [ref=e2006]:
+              - text: $290
+              - generic [ref=e2007]: /un
+            - generic [ref=e2008]:
+              - generic [ref=e2009]:
+                - button "-" [ref=e2010] [cursor=pointer]
+                - generic [ref=e2011]: "1"
+                - button "+" [ref=e2012] [cursor=pointer]
+              - button "+ Agregar" [ref=e2013] [cursor=pointer]
+        - generic [ref=e2014]:
+          - img "Acondicionador (400ml)" [ref=e2016]
+          - generic [ref=e2017]:
+            - heading "Acondicionador (400ml)" [level=3] [ref=e2018]
+            - generic [ref=e2019]:
+              - text: $295
+              - generic [ref=e2020]: /un
+            - generic [ref=e2021]:
+              - generic [ref=e2022]:
+                - button "-" [ref=e2023] [cursor=pointer]
+                - generic [ref=e2024]: "1"
+                - button "+" [ref=e2025] [cursor=pointer]
+              - button "+ Agregar" [ref=e2026] [cursor=pointer]
+        - generic [ref=e2027]:
+          - img "Jabón de Tocador x3" [ref=e2029]
+          - generic [ref=e2030]:
+            - heading "Jabón de Tocador x3" [level=3] [ref=e2031]
+            - generic [ref=e2032]:
+              - text: $165
+              - generic [ref=e2033]: /un
+            - generic [ref=e2034]:
+              - generic [ref=e2035]:
+                - button "-" [ref=e2036] [cursor=pointer]
+                - generic [ref=e2037]: "1"
+                - button "+" [ref=e2038] [cursor=pointer]
+              - button "+ Agregar" [ref=e2039] [cursor=pointer]
+        - generic [ref=e2040]:
+          - img "Pasta Dental (90ml)" [ref=e2042]
+          - generic [ref=e2043]:
+            - heading "Pasta Dental (90ml)" [level=3] [ref=e2044]
+            - generic [ref=e2045]:
+              - text: $145
+              - generic [ref=e2046]: /un
+            - generic [ref=e2047]:
+              - generic [ref=e2048]:
+                - button "-" [ref=e2049] [cursor=pointer]
+                - generic [ref=e2050]: "1"
+                - button "+" [ref=e2051] [cursor=pointer]
+              - button "+ Agregar" [ref=e2052] [cursor=pointer]
+        - generic [ref=e2053]:
+          - img "Cepillo de Dientes" [ref=e2055]
+          - generic [ref=e2056]:
+            - heading "Cepillo de Dientes" [level=3] [ref=e2057]
+            - generic [ref=e2058]:
+              - text: $110
+              - generic [ref=e2059]: /un
+            - generic [ref=e2060]:
+              - generic [ref=e2061]:
+                - button "-" [ref=e2062] [cursor=pointer]
+                - generic [ref=e2063]: "1"
+                - button "+" [ref=e2064] [cursor=pointer]
+              - button "+ Agregar" [ref=e2065] [cursor=pointer]
+        - generic [ref=e2066]:
+          - img "Desodorante Spray (150ml)" [ref=e2068]
+          - generic [ref=e2069]:
+            - heading "Desodorante Spray (150ml)" [level=3] [ref=e2070]
+            - generic [ref=e2071]:
+              - text: $280
+              - generic [ref=e2072]: /un
+            - generic [ref=e2073]:
+              - generic [ref=e2074]:
+                - button "-" [ref=e2075] [cursor=pointer]
+                - generic [ref=e2076]: "1"
+                - button "+" [ref=e2077] [cursor=pointer]
+              - button "+ Agregar" [ref=e2078] [cursor=pointer]
+        - generic [ref=e2079]:
+          - img "Afeitadora Descartable" [ref=e2081]
+          - generic [ref=e2082]:
+            - heading "Afeitadora Descartable" [level=3] [ref=e2083]
+            - generic [ref=e2084]:
+              - text: $195
+              - generic [ref=e2085]: /un
+            - generic [ref=e2086]:
+              - generic [ref=e2087]:
+                - button "-" [ref=e2088] [cursor=pointer]
+                - generic [ref=e2089]: "1"
+                - button "+" [ref=e2090] [cursor=pointer]
+              - button "+ Agregar" [ref=e2091] [cursor=pointer]
+        - generic [ref=e2092]:
+          - img "Crema de Afeitar (100ml)" [ref=e2094]
+          - generic [ref=e2095]:
+            - heading "Crema de Afeitar (100ml)" [level=3] [ref=e2096]
+            - generic [ref=e2097]:
+              - text: $210
+              - generic [ref=e2098]: /un
+            - generic [ref=e2099]:
+              - generic [ref=e2100]:
+                - button "-" [ref=e2101] [cursor=pointer]
+                - generic [ref=e2102]: "1"
+                - button "+" [ref=e2103] [cursor=pointer]
+              - button "+ Agregar" [ref=e2104] [cursor=pointer]
+        - generic [ref=e2105]:
+          - img "Algodón (50g)" [ref=e2107]
+          - generic [ref=e2108]:
+            - heading "Algodón (50g)" [level=3] [ref=e2109]
+            - generic [ref=e2110]:
+              - text: $120
+              - generic [ref=e2111]: /un
+            - generic [ref=e2112]:
+              - generic [ref=e2113]:
+                - button "-" [ref=e2114] [cursor=pointer]
+                - generic [ref=e2115]: "1"
+                - button "+" [ref=e2116] [cursor=pointer]
+              - button "+ Agregar" [ref=e2117] [cursor=pointer]
+        - generic [ref=e2118]:
+          - img "Toallas Femeninas x8" [ref=e2120]
+          - generic [ref=e2121]:
+            - heading "Toallas Femeninas x8" [level=3] [ref=e2122]
+            - generic [ref=e2123]:
+              - text: $240
+              - generic [ref=e2124]: /un
+            - generic [ref=e2125]:
+              - generic [ref=e2126]:
+                - button "-" [ref=e2127] [cursor=pointer]
+                - generic [ref=e2128]: "1"
+                - button "+" [ref=e2129] [cursor=pointer]
+              - button "+ Agregar" [ref=e2130] [cursor=pointer]
+        - generic [ref=e2131]:
+          - img "Leña (Bolsa grande)" [ref=e2133]
+          - generic [ref=e2134]:
+            - heading "Leña (Bolsa grande)" [level=3] [ref=e2135]
+            - generic [ref=e2136]:
+              - text: $290
+              - generic [ref=e2137]: /un
+            - generic [ref=e2138]:
+              - generic [ref=e2139]:
+                - button "-" [ref=e2140] [cursor=pointer]
+                - generic [ref=e2141]: "1"
+                - button "+" [ref=e2142] [cursor=pointer]
+              - button "+ Agregar" [ref=e2143] [cursor=pointer]
+        - generic [ref=e2144]:
+          - generic [ref=e2145]: Oferta
+          - img "Leña (Bolsa chica)" [ref=e2147]
+          - generic [ref=e2148]:
+            - heading "Leña (Bolsa chica)" [level=3] [ref=e2149]
+            - generic [ref=e2150]:
+              - text: $150
+              - generic [ref=e2151]: /un
+            - generic [ref=e2152]:
+              - generic [ref=e2153]:
+                - button "-" [ref=e2154] [cursor=pointer]
+                - generic [ref=e2155]: "1"
+                - button "+" [ref=e2156] [cursor=pointer]
+              - button "+ Agregar" [ref=e2157] [cursor=pointer]
+        - generic [ref=e2158]:
+          - img "Carbón (Bolsa 3kg)" [ref=e2160]
+          - generic [ref=e2161]:
+            - heading "Carbón (Bolsa 3kg)" [level=3] [ref=e2162]
+            - generic [ref=e2163]:
+              - text: $245
+              - generic [ref=e2164]: /un
+            - generic [ref=e2165]:
+              - generic [ref=e2166]:
+                - button "-" [ref=e2167] [cursor=pointer]
+                - generic [ref=e2168]: "1"
+                - button "+" [ref=e2169] [cursor=pointer]
+              - button "+ Agregar" [ref=e2170] [cursor=pointer]
+        - generic [ref=e2171]:
+          - img "Carbón Premium (5kg)" [ref=e2173]
+          - generic [ref=e2174]:
+            - heading "Carbón Premium (5kg)" [level=3] [ref=e2175]
+            - generic [ref=e2176]:
+              - text: $390
+              - generic [ref=e2177]: /un
+            - generic [ref=e2178]:
+              - generic [ref=e2179]:
+                - button "-" [ref=e2180] [cursor=pointer]
+                - generic [ref=e2181]: "1"
+                - button "+" [ref=e2182] [cursor=pointer]
+              - button "+ Agregar" [ref=e2183] [cursor=pointer]
+        - generic [ref=e2184]:
+          - img "Pastillas Encendedor x6" [ref=e2186]
+          - generic [ref=e2187]:
+            - heading "Pastillas Encendedor x6" [level=3] [ref=e2188]
+            - generic [ref=e2189]:
+              - text: $120
+              - generic [ref=e2190]: /un
+            - generic [ref=e2191]:
+              - generic [ref=e2192]:
+                - button "-" [ref=e2193] [cursor=pointer]
+                - generic [ref=e2194]: "1"
+                - button "+" [ref=e2195] [cursor=pointer]
+              - button "+ Agregar" [ref=e2196] [cursor=pointer]
+  - complementary [ref=e2198]:
+    - generic [ref=e2199]:
+      - heading "Tu Pedido" [level=2] [ref=e2200]
+      - button "Cerrar carrito" [ref=e2201] [cursor=pointer]: ✕
+    - generic [ref=e2203]:
+      - generic [ref=e2204]:
+        - generic [ref=e2205]: Asado de Tira
+        - generic [ref=e2206]: "$390 c/u · Total: $390"
+      - generic [ref=e2207]:
+        - button "Restar" [ref=e2208] [cursor=pointer]: "-"
+        - generic [ref=e2209]: "1"
+        - button "Sumar" [ref=e2210] [cursor=pointer]: +
+    - generic [ref=e2211]:
+      - generic [ref=e2212]:
+        - paragraph [ref=e2213]: 🔥 ¿Te falta algo para el asado?
+        - button "+ Leña (Bolsa chica) ($150)" [ref=e2214] [cursor=pointer]
+      - generic [ref=e2215]:
+        - generic [ref=e2216]: "Total:"
+        - generic [ref=e2217]: $390
+      - button "Continuar al Envío →" [ref=e2218] [cursor=pointer]
+  - generic [ref=e2219]:
+    - generic [ref=e2220]:
+      - generic [ref=e2221]:
+        - generic [ref=e2222]: 🤖
+        - generic [ref=e2223]:
+          - strong [ref=e2224]: Asistente Bello Mercado
+          - generic [ref=e2225]: ● ● En línea
+      - button "Cerrar chat" [ref=e2226] [cursor=pointer]: ✕
+    - generic [ref=e2228]:
+      - paragraph [ref=e2229]:
+        - text: ¡Hola! Soy el asistente virtual de
+        - strong [ref=e2230]: Bello Mercado
+        - text: 🥩
+      - paragraph
+      - paragraph [ref=e2231]:
+        - text: Estoy aquí para ayudarte en todo lo que necesites. Puedo
+        - strong [ref=e2232]: buscar productos
+        - text: ","
+        - strong [ref=e2233]: agregarlos directamente al carrito
+        - text: por vos, o
+        - strong [ref=e2234]: guiarte en la navegación
+        - text: de la página (como abrir el carrito, ir al checkout y confirmar el pedido).
+      - paragraph
+      - paragraph [ref=e2235]:
+        - text: ¿En qué puedo ayudarte hoy? ¡Probá decirme
+        - emphasis [ref=e2236]: "\"Agregá 2kg de asado al carrito\""
+        - text: o
+        - emphasis [ref=e2237]: "\"Mostrame las bebidas\""
+        - text: "!"
+    - generic [ref=e2238]:
+      - button "🔥 Ofertas" [ref=e2239] [cursor=pointer]
+      - button "🥩 Asado" [ref=e2240] [cursor=pointer]
+      - button "🛒 Finalizar compra" [ref=e2241] [cursor=pointer]
+    - generic [ref=e2242]:
+      - 'textbox "Ej: ¿Tienen asado? o Mostrame bebidas..." [ref=e2243]'
+      - button "Enviar mensaje" [disabled] [ref=e2244]: ➤
+  - button "Cerrar chat" [ref=e2245] [cursor=pointer]: ✕
+  - contentinfo [ref=e2246]:
+    - generic [ref=e2247]:
+      - generic [ref=e2248]:
+        - heading "📍 Bello Mercado" [level=4] [ref=e2249]
+        - paragraph [ref=e2250]:
+          - text: Rambla Costanera
+          - text: Solymar, Ciudad de la Costa
+      - generic [ref=e2251]:
+        - heading "📞 Contacto" [level=4] [ref=e2252]
+        - paragraph [ref=e2253]:
+          - text: "Tel: 2681 3030"
+          - text: "WhatsApp: 093 635 208"
+      - generic [ref=e2254]:
+        - heading "⏰ Horarios" [level=4] [ref=e2255]
+        - paragraph [ref=e2256]:
+          - text: "Lunes a Sábados: 08:00 - 22:00"
+          - text: "Domingos: 08:00 - 15:00"
+    - paragraph [ref=e2258]: © 2026 Bello Mercado. Todos los derechos reservados.
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | test.describe('F4: Cart Management', () => {
+  4  |   test('Cart drawer displays items', async ({ page }) => {
+  5  |     await page.goto('/');
+  6  |     await page.getByRole('button', { name: /agregar/i }).first().click();
+  7  |     await page.getByRole('button', { name: /carrito/i }).click();
+  8  |     await expect(page.locator('.cart-drawer .cart-item')).toHaveCount(1);
+  9  |   });
+  10 | 
+  11 |   test('Plus button increases count', async ({ page }) => {
+  12 |     await page.goto('/');
+  13 |     await page.getByRole('button', { name: /agregar/i }).first().click();
+  14 |     await page.getByRole('button', { name: /carrito/i }).click();
+  15 |     const increaseBtn = page.getByRole('button', { name: '+' }).first();
+  16 |     await increaseBtn.click();
+  17 |     const qty = page.locator('.cart-drawer .item-quantity').first();
+  18 |     await expect(qty).toHaveText('2');
+  19 |   });
+  20 | 
+  21 |   test('Minus button decreases count', async ({ page }) => {
+  22 |     await page.goto('/');
+  23 |     await page.getByRole('button', { name: /agregar/i }).first().click();
+  24 |     await page.getByRole('button', { name: /carrito/i }).click();
+  25 |     await page.getByRole('button', { name: '+' }).first().click();
+  26 |     await page.getByRole('button', { name: '-' }).first().click();
+  27 |     const qty = page.locator('.cart-drawer .item-quantity').first();
+  28 |     await expect(qty).toHaveText('1');
+  29 |   });
+  30 | 
+  31 |   test('Zero quantity removes item', async ({ page }) => {
+  32 |     await page.goto('/');
+  33 |     await page.getByRole('button', { name: /agregar/i }).first().click();
+  34 |     await page.getByRole('button', { name: /carrito/i }).click();
+  35 |     await page.getByRole('button', { name: '-' }).first().click();
+  36 |     await expect(page.locator('.cart-drawer .cart-item')).toHaveCount(0);
+  37 |   });
+  38 | 
+  39 |   test('Explicit remove button works', async ({ page }) => {
+  40 |     await page.goto('/');
+  41 |     await page.getByRole('button', { name: /agregar/i }).first().click();
+  42 |     await page.getByRole('button', { name: /carrito/i }).click();
+  43 |     const removeBtn = page.getByRole('button', { name: /eliminar/i }).first();
+> 44 |     await removeBtn.click();
+     |                     ^ Error: locator.click: Test timeout of 30000ms exceeded.
+  45 |     await expect(page.locator('.cart-drawer .cart-item')).toHaveCount(0);
+  46 |   });
+  47 | });
+  48 | 
+```

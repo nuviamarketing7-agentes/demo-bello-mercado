@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -21,13 +21,18 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Proxy endpoint for OpenAI
 app.post('/api/chat', async (req, res) => {
   try {
+    const payload = {
+      model: 'gpt-4o-mini',
+      messages: req.body.messages
+    };
+    const apiKey = process.env.OPENAI_API_KEY || process.env.VITE_OPENAI_API_KEY;
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+        'Authorization': `Bearer ${apiKey}`
       },
-      body: JSON.stringify(req.body)
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {

@@ -1,0 +1,1336 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: tier1-features/f7-chat-history.spec.js >> F7: Chat and State Persistence >> Cart state persistence
+- Location: e2e/tier1-features/f7-chat-history.spec.js:19:3
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('.cart-badge')
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for locator('.cart-badge')
+
+```
+
+```yaml
+- banner:
+  - img "carne": 🥩
+  - text: Bello Mercado
+  - button "Abrir carrito":
+    - img "carrito": 🛒
+- main:
+  - text: Boutique de Carnes & Almacén Gourmet
+  - heading "Bello Mercado" [level=1]
+  - paragraph: Los mejores cortes seleccionados, embutidos artesanales y delicatessen directo a tu puerta en Solymar.
+  - img "ubicacion": 📍
+  - text: Rambla Costanera, Solymar
+  - img "reloj": ⏰
+  - text: "Lun a Sáb: 9:00 a 20:00 | Dom: 9:00 a 14:00"
+  - img "delivery": 🛵
+  - text: Envío a Domicilio Rápido
+  - textbox "🔍 Buscar productos..."
+  - navigation "Categorías de productos":
+    - button "Todo"
+    - button "Carnicería"
+    - button "Fiambrería"
+    - button "Pollos y Aves"
+    - button "Cerdo"
+    - button "Más ▼"
+  - text: 🥩 Recomendación de la Casa
+  - heading "Asado de Tira Premium" [level=3]
+  - paragraph: Corte clásico con la grasa de cobertura justa y un marmoleado excepcional. Ideal para lucirte en la parrilla el fin de semana.
+  - button "+ Agregar Asado ($390/kg)"
+  - heading "⭐ Productos Destacados" [level=2]
+  - text: Premium
+  - img "Asado de Tira"
+  - heading "Asado de Tira" [level=3]
+  - text: $390 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Premium
+  - img "Colita de Cuadril"
+  - heading "Colita de Cuadril" [level=3]
+  - text: $490 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Premium
+  - img "Lomo"
+  - heading "Lomo" [level=3]
+  - text: $850 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Premium
+  - img "Prosciutto"
+  - heading "Prosciutto" [level=3]
+  - text: $920 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - heading "Todo" [level=2]
+  - text: 160 productos Premium
+  - img "Asado de Tira"
+  - heading "Asado de Tira" [level=3]
+  - text: $390 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Vacío"
+  - heading "Vacío" [level=3]
+  - text: $420 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Premium
+  - img "Colita de Cuadril"
+  - heading "Colita de Cuadril" [level=3]
+  - text: $490 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Cuadril Entero"
+  - heading "Cuadril Entero" [level=3]
+  - text: $520 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Entrecot / Bife de Lomo"
+  - heading "Entrecot / Bife de Lomo" [level=3]
+  - text: $680 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Premium
+  - img "Lomo"
+  - heading "Lomo" [level=3]
+  - text: $850 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Paleta"
+  - heading "Paleta" [level=3]
+  - text: $310 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Aguja"
+  - heading "Aguja" [level=3]
+  - text: $270 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Ossobuco"
+  - heading "Ossobuco" [level=3]
+  - text: $280 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Osobuco de Cerdo"
+  - heading "Osobuco de Cerdo" [level=3]
+  - text: $260 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Carnaza"
+  - heading "Carnaza" [level=3]
+  - text: $250 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Casero
+  - img "Milanesas de Carne"
+  - heading "Milanesas de Carne" [level=3]
+  - text: $390 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Carne Picada"
+  - heading "Carne Picada" [level=3]
+  - text: $300 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Mondongo"
+  - heading "Mondongo" [level=3]
+  - text: $200 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Riñones"
+  - heading "Riñones" [level=3]
+  - text: $180 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Chinchulines"
+  - heading "Chinchulines" [level=3]
+  - text: $220 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Mollejas"
+  - heading "Mollejas" [level=3]
+  - text: $350 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Morcilla"
+  - heading "Morcilla" [level=3]
+  - text: $280 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Costillas Vacuna"
+  - heading "Costillas Vacuna" [level=3]
+  - text: $340 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Bife Ancho"
+  - heading "Bife Ancho" [level=3]
+  - text: $590 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Casero
+  - img "Chorizos Caseros"
+  - heading "Chorizos Caseros" [level=3]
+  - text: $360 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Salame Tipo Milano"
+  - heading "Salame Tipo Milano" [level=3]
+  - text: $580 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Jamón Cocido"
+  - heading "Jamón Cocido" [level=3]
+  - text: $420 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Jamón Crudo"
+  - heading "Jamón Crudo" [level=3]
+  - text: $650 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Mortadela"
+  - heading "Mortadela" [level=3]
+  - text: $320 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Paleta Cocida"
+  - heading "Paleta Cocida" [level=3]
+  - text: $380 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Lomito Ahumado"
+  - heading "Lomito Ahumado" [level=3]
+  - text: $720 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Queso Feta"
+  - heading "Queso Feta" [level=3]
+  - text: $540 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Queso Colonia"
+  - heading "Queso Colonia" [level=3]
+  - text: $480 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Queso Dambo"
+  - heading "Queso Dambo" [level=3]
+  - text: $450 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Queso Parmesano"
+  - heading "Queso Parmesano" [level=3]
+  - text: $680 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Queso Mozzarella"
+  - heading "Queso Mozzarella" [level=3]
+  - text: $510 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Salchichas Frankfurt"
+  - heading "Salchichas Frankfurt" [level=3]
+  - text: $290 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pastrami"
+  - heading "Pastrami" [level=3]
+  - text: $780 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Premium
+  - img "Prosciutto"
+  - heading "Prosciutto" [level=3]
+  - text: $920 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pollo Entero"
+  - heading "Pollo Entero" [level=3]
+  - text: $185 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pechuga de Pollo"
+  - heading "Pechuga de Pollo" [level=3]
+  - text: $290 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Muslo de Pollo"
+  - heading "Muslo de Pollo" [level=3]
+  - text: $220 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Alitas de Pollo"
+  - heading "Alitas de Pollo" [level=3]
+  - text: $210 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Milanesas de Pollo"
+  - heading "Milanesas de Pollo" [level=3]
+  - text: $310 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Suprema de Pollo"
+  - heading "Suprema de Pollo" [level=3]
+  - text: $330 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Corazones de Pollo"
+  - heading "Corazones de Pollo" [level=3]
+  - text: $190 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pato Entero"
+  - heading "Pato Entero" [level=3]
+  - text: $420 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Bondiola de Cerdo"
+  - heading "Bondiola de Cerdo" [level=3]
+  - text: $330 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Costillas de Cerdo"
+  - heading "Costillas de Cerdo" [level=3]
+  - text: $310 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Lomo de Cerdo"
+  - heading "Lomo de Cerdo" [level=3]
+  - text: $380 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Panceta Fresca"
+  - heading "Panceta Fresca" [level=3]
+  - text: $290 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Panceta Ahumada"
+  - heading "Panceta Ahumada" [level=3]
+  - text: $360 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pernil de Cerdo"
+  - heading "Pernil de Cerdo" [level=3]
+  - text: $340 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Chuletas de Cerdo"
+  - heading "Chuletas de Cerdo" [level=3]
+  - text: $320 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Filete de Merluza"
+  - heading "Filete de Merluza" [level=3]
+  - text: $380 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Lenguado Fresco"
+  - heading "Lenguado Fresco" [level=3]
+  - text: $490 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Camarones"
+  - heading "Camarones" [level=3]
+  - text: $620 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Mejillones"
+  - heading "Mejillones" [level=3]
+  - text: $280 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Atún en Lata (x3)"
+  - heading "Atún en Lata (x3)" [level=3]
+  - text: $210 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Sardinas en Aceite"
+  - heading "Sardinas en Aceite" [level=3]
+  - text: $95 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Oferta
+  - img "Papa (bolsa 5kg)"
+  - heading "Papa (bolsa 5kg)" [level=3]
+  - text: $210 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Cebolla (bolsa 2kg)"
+  - heading "Cebolla (bolsa 2kg)" [level=3]
+  - text: $115 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Ajo (cabeza)"
+  - heading "Ajo (cabeza)" [level=3]
+  - text: $45 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Zanahoria (kg)"
+  - heading "Zanahoria (kg)" [level=3]
+  - text: $80 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Tomate (kg)"
+  - heading "Tomate (kg)" [level=3]
+  - text: $120 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Limón (bolsa)"
+  - heading "Limón (bolsa)" [level=3]
+  - text: $90 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Lechuga (un)"
+  - heading "Lechuga (un)" [level=3]
+  - text: $65 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pimiento Rojo"
+  - heading "Pimiento Rojo" [level=3]
+  - text: $95 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Manzana (kg)"
+  - heading "Manzana (kg)" [level=3]
+  - text: $130 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Naranja (kg)"
+  - heading "Naranja (kg)" [level=3]
+  - text: $90 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Banana (kg)"
+  - heading "Banana (kg)" [level=3]
+  - text: $75 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Leche Entera (1L)"
+  - heading "Leche Entera (1L)" [level=3]
+  - text: $65 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Leche Descremada (1L)"
+  - heading "Leche Descremada (1L)" [level=3]
+  - text: $68 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Yogur Natural (200g)"
+  - heading "Yogur Natural (200g)" [level=3]
+  - text: $70 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Manteca (200g)"
+  - heading "Manteca (200g)" [level=3]
+  - text: $145 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Crema de Leche (200ml)"
+  - heading "Crema de Leche (200ml)" [level=3]
+  - text: $120 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Huevos Blancos (doc.)"
+  - heading "Huevos Blancos (doc.)" [level=3]
+  - text: $185 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Huevos Marrones (doc.)"
+  - heading "Huevos Marrones (doc.)" [level=3]
+  - text: $195 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Agua Mineral (1.5L)"
+  - heading "Agua Mineral (1.5L)" [level=3]
+  - text: $80 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Agua c/Gas (1.5L)"
+  - heading "Agua c/Gas (1.5L)" [level=3]
+  - text: $85 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Oferta
+  - img "Coca-Cola (2.25L)"
+  - heading "Coca-Cola (2.25L)" [level=3]
+  - text: $195 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Coca-Cola (500ml)"
+  - heading "Coca-Cola (500ml)" [level=3]
+  - text: $95 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pepsi (2L)"
+  - heading "Pepsi (2L)" [level=3]
+  - text: $175 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Sprite (2L)"
+  - heading "Sprite (2L)" [level=3]
+  - text: $175 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Fanta Naranja (2L)"
+  - heading "Fanta Naranja (2L)" [level=3]
+  - text: $175 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Jugo Tang (sobre)"
+  - heading "Jugo Tang (sobre)" [level=3]
+  - text: $45 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Cerveza Patricia (1L)"
+  - heading "Cerveza Patricia (1L)" [level=3]
+  - text: $145 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Cerveza Pilsen (lata)"
+  - heading "Cerveza Pilsen (lata)" [level=3]
+  - text: $95 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Cerveza Amstel (6-pack)"
+  - heading "Cerveza Amstel (6-pack)" [level=3]
+  - text: $590 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Vino Tinto (750ml)"
+  - heading "Vino Tinto (750ml)" [level=3]
+  - text: $420 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Vino Blanco (750ml)"
+  - heading "Vino Blanco (750ml)" [level=3]
+  - text: $390 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Sidra Don Valentin (750)"
+  - heading "Sidra Don Valentin (750)" [level=3]
+  - text: $330 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Whisky Etiqueta Roja"
+  - heading "Whisky Etiqueta Roja" [level=3]
+  - text: $1290 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Ron Bacardí (750ml)"
+  - heading "Ron Bacardí (750ml)" [level=3]
+  - text: $980 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Té (caja 25 saquitos)"
+  - heading "Té (caja 25 saquitos)" [level=3]
+  - text: $145 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Yerba Mate (1kg)"
+  - heading "Yerba Mate (1kg)" [level=3]
+  - text: $380 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Café Molido (250g)"
+  - heading "Café Molido (250g)" [level=3]
+  - text: $290 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Arroz (1kg)"
+  - heading "Arroz (1kg)" [level=3]
+  - text: $115 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Arroz Integral (1kg)"
+  - heading "Arroz Integral (1kg)" [level=3]
+  - text: $135 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Fideos Espagueti (500g)"
+  - heading "Fideos Espagueti (500g)" [level=3]
+  - text: $85 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Fideos Corbata (500g)"
+  - heading "Fideos Corbata (500g)" [level=3]
+  - text: $85 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Harina 0000 (1kg)"
+  - heading "Harina 0000 (1kg)" [level=3]
+  - text: $95 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Azúcar (1kg)"
+  - heading "Azúcar (1kg)" [level=3]
+  - text: $110 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Sal Fina (500g)"
+  - heading "Sal Fina (500g)" [level=3]
+  - text: $55 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Aceite de Girasol (1L)"
+  - heading "Aceite de Girasol (1L)" [level=3]
+  - text: $175 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Aceite de Oliva (500ml)"
+  - heading "Aceite de Oliva (500ml)" [level=3]
+  - text: $490 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Vinagre de Manzana"
+  - heading "Vinagre de Manzana" [level=3]
+  - text: $130 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Salsa de Tomate (400g)"
+  - heading "Salsa de Tomate (400g)" [level=3]
+  - text: $110 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pasta de Tomate (200g)"
+  - heading "Pasta de Tomate (200g)" [level=3]
+  - text: $80 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Mayonesa (500g)"
+  - heading "Mayonesa (500g)" [level=3]
+  - text: $210 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Ketchup (500g)"
+  - heading "Ketchup (500g)" [level=3]
+  - text: $195 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Mostaza (200g)"
+  - heading "Mostaza (200g)" [level=3]
+  - text: $150 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Chimichurri (200ml)"
+  - heading "Chimichurri (200ml)" [level=3]
+  - text: $185 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Salsa Criolla (lata)"
+  - heading "Salsa Criolla (lata)" [level=3]
+  - text: $120 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Lentejas (500g)"
+  - heading "Lentejas (500g)" [level=3]
+  - text: $115 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Garbanzos (500g)"
+  - heading "Garbanzos (500g)" [level=3]
+  - text: $120 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Arvejas (400g lata)"
+  - heading "Arvejas (400g lata)" [level=3]
+  - text: $95 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Choclo (400g lata)"
+  - heading "Choclo (400g lata)" [level=3]
+  - text: $105 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Galletitas Saladas (200g)"
+  - heading "Galletitas Saladas (200g)" [level=3]
+  - text: $130 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Galletitas Dulces (200g)"
+  - heading "Galletitas Dulces (200g)" [level=3]
+  - text: $145 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Papas Fritas (150g)"
+  - heading "Papas Fritas (150g)" [level=3]
+  - text: $165 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Maizena (500g)"
+  - heading "Maizena (500g)" [level=3]
+  - text: $140 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pan Rallado (500g)"
+  - heading "Pan Rallado (500g)" [level=3]
+  - text: $115 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pan de Mesa (500g)"
+  - heading "Pan de Mesa (500g)" [level=3]
+  - text: $120 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pan Lactal (720g)"
+  - heading "Pan Lactal (720g)" [level=3]
+  - text: $195 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pan de Hamburguesa (x4)"
+  - heading "Pan de Hamburguesa (x4)" [level=3]
+  - text: $135 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pan Árabe (x5)"
+  - heading "Pan Árabe (x5)" [level=3]
+  - text: $125 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pan Francés (x6)"
+  - heading "Pan Francés (x6)" [level=3]
+  - text: $145 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Casero
+  - img "Facturas (x6)"
+  - heading "Facturas (x6)" [level=3]
+  - text: $290 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Bizcochos (x6)"
+  - heading "Bizcochos (x6)" [level=3]
+  - text: $210 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Hamburguesas x4 (500g)"
+  - heading "Hamburguesas x4 (500g)" [level=3]
+  - text: $390 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Papas Pre-fritas (1kg)"
+  - heading "Papas Pre-fritas (1kg)" [level=3]
+  - text: $280 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Supremas Rebozadas (x4)"
+  - heading "Supremas Rebozadas (x4)" [level=3]
+  - text: $410 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pizza Congelada (muzz.)"
+  - heading "Pizza Congelada (muzz.)" [level=3]
+  - text: $450 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Empanadas Carne (x12)"
+  - heading "Empanadas Carne (x12)" [level=3]
+  - text: $520 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Helado Familiar (1L)"
+  - heading "Helado Familiar (1L)" [level=3]
+  - text: $490 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Chorizos Congelados (kg)"
+  - heading "Chorizos Congelados (kg)" [level=3]
+  - text: $340 /kg
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Detergente (500ml)"
+  - heading "Detergente (500ml)" [level=3]
+  - text: $135 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Lavandina (2L)"
+  - heading "Lavandina (2L)" [level=3]
+  - text: $165 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Limpiapisos (1L)"
+  - heading "Limpiapisos (1L)" [level=3]
+  - text: $195 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Desengrasante (500ml)"
+  - heading "Desengrasante (500ml)" [level=3]
+  - text: $185 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Jabón en Polvo (1kg)"
+  - heading "Jabón en Polvo (1kg)" [level=3]
+  - text: $290 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Suavizante (1L)"
+  - heading "Suavizante (1L)" [level=3]
+  - text: $250 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Bolsas Basura x10"
+  - heading "Bolsas Basura x10" [level=3]
+  - text: $120 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Papel Higiénico (x4)"
+  - heading "Papel Higiénico (x4)" [level=3]
+  - text: $220 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Esponja Dual x2"
+  - heading "Esponja Dual x2" [level=3]
+  - text: $95 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Trapos de Piso x2"
+  - heading "Trapos de Piso x2" [level=3]
+  - text: $145 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Limpiavidrios (500ml)"
+  - heading "Limpiavidrios (500ml)" [level=3]
+  - text: $170 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Bala de Gas (10kg)"
+  - heading "Bala de Gas (10kg)" [level=3]
+  - text: $1450 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Shampoo (400ml)"
+  - heading "Shampoo (400ml)" [level=3]
+  - text: $290 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Acondicionador (400ml)"
+  - heading "Acondicionador (400ml)" [level=3]
+  - text: $295 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Jabón de Tocador x3"
+  - heading "Jabón de Tocador x3" [level=3]
+  - text: $165 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pasta Dental (90ml)"
+  - heading "Pasta Dental (90ml)" [level=3]
+  - text: $145 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Cepillo de Dientes"
+  - heading "Cepillo de Dientes" [level=3]
+  - text: $110 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Desodorante Spray (150ml)"
+  - heading "Desodorante Spray (150ml)" [level=3]
+  - text: $280 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Afeitadora Descartable"
+  - heading "Afeitadora Descartable" [level=3]
+  - text: $195 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Crema de Afeitar (100ml)"
+  - heading "Crema de Afeitar (100ml)" [level=3]
+  - text: $210 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Algodón (50g)"
+  - heading "Algodón (50g)" [level=3]
+  - text: $120 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Toallas Femeninas x8"
+  - heading "Toallas Femeninas x8" [level=3]
+  - text: $240 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Leña (Bolsa grande)"
+  - heading "Leña (Bolsa grande)" [level=3]
+  - text: $290 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - text: Oferta
+  - img "Leña (Bolsa chica)"
+  - heading "Leña (Bolsa chica)" [level=3]
+  - text: $150 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Carbón (Bolsa 3kg)"
+  - heading "Carbón (Bolsa 3kg)" [level=3]
+  - text: $245 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Carbón Premium (5kg)"
+  - heading "Carbón Premium (5kg)" [level=3]
+  - text: $390 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+  - img "Pastillas Encendedor x6"
+  - heading "Pastillas Encendedor x6" [level=3]
+  - text: $120 /un
+  - button "-"
+  - text: "1"
+  - button "+"
+  - button "+ Agregar"
+- text: 🤖
+- strong: Asistente Bello Mercado
+- text: ● ● En línea
+- button "Cerrar chat": ✕
+- paragraph:
+  - text: ¡Hola! Soy el asistente virtual de
+  - strong: Bello Mercado
+  - text: 🥩
+- paragraph
+- paragraph:
+  - text: Estoy aquí para ayudarte en todo lo que necesites. Puedo
+  - strong: buscar productos
+  - text: ","
+  - strong: agregarlos directamente al carrito
+  - text: por vos, o
+  - strong: guiarte en la navegación
+  - text: de la página (como abrir el carrito, ir al checkout y confirmar el pedido).
+- paragraph
+- paragraph:
+  - text: ¿En qué puedo ayudarte hoy? ¡Probá decirme
+  - emphasis: "\"Agregá 2kg de asado al carrito\""
+  - text: o
+  - emphasis: "\"Mostrame las bebidas\""
+  - text: "!"
+- button "🔥 Ofertas"
+- button "🥩 Asado"
+- button "🛒 Finalizar compra"
+- 'textbox "Ej: ¿Tienen asado? o Mostrame bebidas..."'
+- button "Enviar mensaje" [disabled]: ➤
+- button "Cerrar chat": ✕
+- contentinfo:
+  - heading "📍 Bello Mercado" [level=4]
+  - paragraph: Rambla Costanera Solymar, Ciudad de la Costa
+  - heading "📞 Contacto" [level=4]
+  - paragraph: "Tel: 2681 3030 WhatsApp: 093 635 208"
+  - heading "⏰ Horarios" [level=4]
+  - paragraph: "Lunes a Sábados: 08:00 - 22:00 Domingos: 08:00 - 15:00"
+  - paragraph: © 2026 Bello Mercado. Todos los derechos reservados.
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | test.describe('F7: Chat and State Persistence', () => {
+  4  |   test('Message persistence on reload', async ({ page }) => {
+  5  |     await page.goto('/');
+  6  |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  7  |     await page.getByPlaceholder(/escribe/i).fill('Test message persistent');
+  8  |     await page.getByPlaceholder(/escribe/i).press('Enter');
+  9  |     
+  10 |     // Wait for it to appear
+  11 |     await expect(page.locator('.chat-message.user').last()).toBeVisible();
+  12 |     
+  13 |     // Reload
+  14 |     await page.reload();
+  15 |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  16 |     await expect(page.locator('.chat-message.user').last()).toContainText('Test message persistent');
+  17 |   });
+  18 | 
+  19 |   test('Cart state persistence', async ({ page }) => {
+  20 |     await page.goto('/');
+  21 |     await page.getByRole('button', { name: /agregar/i }).first().click();
+  22 |     
+  23 |     // Wait for badge
+  24 |     await expect(page.locator('.cart-badge')).toBeVisible();
+  25 |     
+  26 |     // Reload
+  27 |     await page.reload();
+> 28 |     await expect(page.locator('.cart-badge')).toBeVisible();
+     |                                               ^ Error: expect(locator).toBeVisible() failed
+  29 |   });
+  30 | 
+  31 |   test('Opening chat after reload preserves history', async ({ page }) => {
+  32 |     await page.goto('/');
+  33 |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  34 |     await page.getByPlaceholder(/escribe/i).fill('History test');
+  35 |     await page.getByPlaceholder(/escribe/i).press('Enter');
+  36 |     
+  37 |     await page.reload();
+  38 |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  39 |     await expect(page.locator('.chat-message')).toHaveCount(2); // assuming initial greeting + user msg
+  40 |   });
+  41 | 
+  42 |   test('Clearing storage resets chat', async ({ page, context }) => {
+  43 |     await page.goto('/');
+  44 |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  45 |     await page.getByPlaceholder(/escribe/i).fill('To be deleted');
+  46 |     await page.getByPlaceholder(/escribe/i).press('Enter');
+  47 |     
+  48 |     await context.clearCookies();
+  49 |     await page.evaluate(() => localStorage.clear());
+  50 |     await page.reload();
+  51 |     
+  52 |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  53 |     await expect(page.locator('.chat-message')).toHaveCount(1); // just initial
+  54 |   });
+  55 | 
+  56 |   test('Multi-message history maintains order', async ({ page }) => {
+  57 |     await page.goto('/');
+  58 |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  59 |     const input = page.getByPlaceholder(/escribe/i);
+  60 |     await input.fill('Msg 1');
+  61 |     await input.press('Enter');
+  62 |     await input.fill('Msg 2');
+  63 |     await input.press('Enter');
+  64 |     
+  65 |     await page.reload();
+  66 |     await page.locator('.chat-fab, [aria-label="chat"]').click();
+  67 |     const messages = page.locator('.chat-message.user');
+  68 |     await expect(messages.nth(0)).toContainText('Msg 1');
+  69 |     await expect(messages.nth(1)).toContainText('Msg 2');
+  70 |   });
+  71 | });
+  72 | 
+```

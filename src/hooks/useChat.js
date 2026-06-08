@@ -105,6 +105,8 @@ export function useChat({
         })
       });
 
+      if (!response.ok) throw new Error('API Error');
+
       const data = await response.json();
       const fullContent = data.choices?.[0]?.message?.content || 'Lo siento, no pude procesar tu consulta.';
 

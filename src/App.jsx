@@ -136,7 +136,7 @@ export default function App() {
       />
 
       <ToastNotification toastMessage={toastMessage} />
-      <BackToTop showBackToTop={showBackToTop} />
+      <BackToTop showBackToTop={showBackToTop} isChatOpen={isChatOpen} />
 
       <Footer />
     </div>
