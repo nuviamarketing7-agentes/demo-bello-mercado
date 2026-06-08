@@ -1,8 +1,0 @@
-[build]
-command = "npm run build"
-
-[start]
-cmd = "npm run start"
-
-[variables]
-PORT = "3000"
