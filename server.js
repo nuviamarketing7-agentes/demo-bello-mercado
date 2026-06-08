@@ -71,7 +71,7 @@ portsToTry.forEach(p => {
   if (listenedPorts.has(p)) return;
   listenedPorts.add(p);
   
-  const server = app.listen(p, '0.0.0.0', () => {
+  const server = app.listen(p, () => {
     console.log(`Server is running on port ${p}`);
   });
   
